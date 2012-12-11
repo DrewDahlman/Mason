@@ -66,4 +66,6 @@ Mason.js has a number of options:
 </ul>
 
 ##EXAMPLES
-Fluid
+<a href='http://drewdahlman.com/experiments/mason/' target='_blank'>Basic</a><br/>
+<a href='http://drewdahlman.com/experiments/mason/fluid.html' target='_blank'>Fluid</a><br/>
+<a href='http://drewdahlman.com/experiments/mason/fixed.html' target='_blank'>Fixed</a>
