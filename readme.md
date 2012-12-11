@@ -4,7 +4,7 @@ Mason.js is a jQuery plugin that allows you to create a perfect grid of elements
 ##USE
 <br/><br/>
 <strong>Basic CSS </strong>
-<pre>
+<code>
 	#container {
 		width: 100%
 		position: relative;
@@ -14,10 +14,10 @@ Mason.js is a jQuery plugin that allows you to create a perfect grid of elements
 		background-color: #00ffff;
 		position: relative;
 	}
-</pre>
+</code>
 <br/><br/>
 <strong>Basic HTML</strong>
-<pre>
+<code>
 	<html>
 		<head>
 			<title>Mason Example</title>
@@ -37,10 +37,10 @@ Mason.js is a jQuery plugin that allows you to create a perfect grid of elements
 			</div>
 		</body>
 	</html>
-</pre>
+</code>
 <br/><br/>
 <strong>Call Mason.js ( BASIC )</strong>
-<pre>
+<code>
 	$("#container").mason({
 		itemSelector: ".box",
 		ratio: 1.5,
@@ -50,7 +50,7 @@ Mason.js is a jQuery plugin that allows you to create a perfect grid of elements
 			[2,2],
 		]
 	});
-</pre>
+</code>
 
 ##OPTIONS
 Mason.js has a number of options:
