@@ -16,31 +16,8 @@ Mason.js is a jQuery plugin that allows you to create a perfect grid of elements
 	}
 </pre>
 <br/><br/>
-<strong>Basic HTML</strong>
-<pre>
-	<html>
-		<head>
-			<title>Mason Example</title>
-			<script src='js/jQuery.js'></script>
-			<script src='js/mason.min.js'></script>
-		</head>
-		<body>
-			<div id='container'>
-				<div class='box'></div>
-				<div class='box'></div>
-				<div class='box'></div>
-				<div class='box'></div>
-				<div class='box'></div>
-				<div class='box'></div>
-				<div class='box'></div>
-				<div class='box'></div>
-			</div>
-		</body>
-	</html>
-</pre>
-<br/><br/>
 <strong>Call Mason.js ( BASIC )</strong>
-<code>
+<pre>
 	$("#container").mason({
 		itemSelector: ".box",
 		ratio: 1.5,
@@ -83,7 +60,7 @@ Mason.js has a number of options:
 	</li>
 	<li><strong>Layout<strong>
 		<ul>
-			<li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be responsive.</li>
+			<li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be respon</li>
 		</ul>
 	</li>
 </ul>
