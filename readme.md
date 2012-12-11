@@ -32,6 +32,29 @@ $("#container").mason({
 
 ##OPTIONS
 Mason.js has a number of options:
+<pre>
+$("#container").mason({
+	itemSelector: ".box",
+	ratio: 1.5,
+	sizes: [
+		[1,1],
+		[1,2],
+		[2,2],
+	],
+	columns: [
+		[0,480,1],
+		[480,780,2],
+		[780,1080,3],
+		[1080,1320,4],
+		[1320,1680,5]
+	],
+	filler: {
+		itemSelector: '.fillerBox',
+		filler_class: 'custom_filler'
+	},
+	layout: 'fluid'
+});
+</pre>
 <ul>
 	<li><strong>itemSelector<strong>
 		<ul>
