@@ -56,33 +56,33 @@ $("#container").mason({
 });
 </pre>
 <ul>
-	<li><strong>itemSelector<strong>
+	<li><strong>itemSelector</strong>
 		<ul>
 			<li>the element that makes up your grid</li>
 		</ul>
 	</li>
-	<li><strong>ratio<strong>
+	<li><strong>ratio</strong>
 		<ul>
 			<li>The ratio is a number that is used to create the blocks based on column count and width.</li>
 		</ul>
 	</li>
-	<li><strong>sizes<strong>
+	<li><strong>sizes</strong>
 		<ul>
 			<li>Sizes are an array of sizes you wish to use in your grid. These are composed of block numbers. ( ex: [1,1] means 1 block high, 1 block wide )</li>
 		</ul>
 	</li>
-	<li><strong>columns<strong>
+	<li><strong>columns</strong>
 		<ul>
 			<li>columns are an array of break points for your columns. Think of this like media queries. start small and grow. They should be formatted as [min,max,cols]</li>
 		</ul>
 	</li>
-	<li><strong>filler<strong>
+	<li><strong>filler</strong>
 		<ul>
 			<li>itemSelector: This describes the elements to be used to fill in blank spaces. This will default to the original itemSelector if there is nothing</li>
 			<li>filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid</li>
 		</ul>
 	</li>
-	<li><strong>Layout<strong>
+	<li><strong>Layout</strong>
 		<ul>
 			<li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be respon</li>
 		</ul>
