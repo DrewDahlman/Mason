@@ -22,7 +22,7 @@
 			filler: {
 				itemSelector: options.itemSelector
 			} 
-		}
+		};
 
 		var elements = {
 			block: {
@@ -30,7 +30,7 @@
 				width: 0
 			},
 			matrix: []
-		}
+		};
 
 		return this.each(function() {
 			var settings = $.extend(defaults,options);
@@ -54,7 +54,7 @@
 
 				// Size Elements
 				sizeElements();
-			}
+			};
 
 			/*
 			 * Size elements according to block size and column count
@@ -92,8 +92,6 @@
 							if( $sel.hasClass(settings.promoted[i][2]) ){
 								ranSize = [settings.promoted[i][0],settings.promoted[i][1]];
 								ran = (settings.sizes.length-1) + i;
-
-								console.log(ran)
 							}
 						}
 
@@ -137,7 +135,6 @@
 						// turn the data size into a number
 						var s = parseFloat($sel.data('size'));
 
-						console.log(settings.sizes[s])
 						// now determine size of the element based on block dimensions and total area
 						var h = settings.sizes[s][1];
 						var w = settings.sizes[s][0];
@@ -160,9 +157,6 @@
 					 * Create filler blocks to seal up empty spaces based on matrix
 					 * This goes column by column to analyze true / false booleans in matrix
 					*/
-
-					console.log(settings.filler.itemSelector)
-					var c = 0,b = 0;
 					for(var i = 0; i < elements.matrix.length; i ++){
 						for(var c = 0; c < elements.matrix[i].length; c++){
 
@@ -190,7 +184,7 @@
 						}
 					}
 				}
-			}
+			};
 
 			/*
 			 * Determine Our Columns
@@ -209,7 +203,7 @@
 					}
 				}
 				return cols;
-			}
+			};
 
 			setup();
 		});
