@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>Mason.js</title>
+		
+		<!-- STYLES -->
+		<style>
+		*{
+			margin:0px;
+		}
+		html,body{
+			height: 100%; 
+			width: 100%;
+			background-image: url(images/mason.jpg);
+			background-position: center;
+			background-size: cover;
+		}
+		#grid{
+			height: 100%; 
+			width: 100%; 
+			position: relative;
+		}
+		.box {
+			background-color: #ff0000;
+			box-shadow: 0px 0px 1px #222;
+			float: left;
+			position: relative;
+		}
+		</style>
+
+		<!-- SCRIPTS -->
+		<script src='js/jQuery.js'></script>
+		<script src='js/mason.js'></script>
+
+	</head>
+	<body>
+		<div id='grid'>
+			<div class='box'></div>
+			<div class='box promoted'></div>
+			<div class='box'></div>
+			<div class='box'></div>
+			<div class='box'></div>
+			<div class='box'></div>
+			<div class='box'></div>
+			<div class='box'></div>
+		</div>
+		<script>
+		$(function(){
+			$("#grid").mason({
+				itemSelector: ".box",
+				ratio: 1.5,
+				sizes: [
+					[1,1],
+					[1,2],
+					[2,2],
+				],
+				columns: [
+					[0,480,1],
+					[480,780,2],
+					[780,1080,3],
+					[1080,1320,4],
+					[1320,1680,5]
+				],
+				promoted: [
+					[2,2,'promoted']
+				]
+			},function(){
+
+			});
+		});
+		</script>
+	</body>
+</html>
