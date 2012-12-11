@@ -64,3 +64,6 @@ Mason.js has a number of options:
 		</ul>
 	</li>
 </ul>
+
+##EXAMPLES
+Fluid
