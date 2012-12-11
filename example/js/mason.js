@@ -20,8 +20,10 @@
 			],
 			promoted: [],
 			filler: {
-				itemSelector: options.itemSelector
-			} 
+				itemSelector: options.itemSelector,
+				filler_class: 'mason_filler'
+			},
+			layout: 'fluid'
 		};
 
 		var elements = {
@@ -47,8 +49,9 @@
 				 * Define our container element.
 				 * Note we append a clear div in order to get a height later on, VERY IMPORTANT!
 			    */
-				$self.width($self.width());
-				$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>")
+			    if($(".mason_clear").length < 1){
+					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>")
+				}
 				elements.block.height = (( $self.width() / columnSize() ) / settings.ratio ).toFixed(0);
 				elements.block.width = ( $self.width() / columnSize() );
 
@@ -113,6 +116,7 @@
 					var el_h = $self.height();
 					var block_h = ( el_h / elements.block.height );
 
+					elements.matrix = [];
 					for(var i = 0; i < block_h; i++){
 						elements.matrix[i] = [];
 						for(var c = 0; c < col; c++){
@@ -176,7 +180,7 @@
 								ran = Math.floor( Math.random() * $(settings.filler.itemSelector).length );
 								filler = $(settings.filler.itemSelector).eq(ran).clone();
 
-								filler.addClass('filler');
+								filler.addClass(settings.filler.filler_class);
 								filler.css({'position':'absolute','top':x+'px','left':y+'px','height':h+'px','width':w+'px'});
 
 								filler.appendTo($self);
@@ -205,6 +209,30 @@
 				return cols;
 			};
 
+			/*
+			 * Baked in utils
+			*/
+			var waitForFinalEvent = (function () {
+			  var timers = {};
+			  return function (callback, ms, uniqueId) {
+			    if (!uniqueId) {
+			      uniqueId = "Don't call this twice without a uniqueId";
+			    }
+			    if (timers[uniqueId]) {
+			      clearTimeout (timers[uniqueId]);
+			    }
+			    timers[uniqueId] = setTimeout(callback, ms);
+			  };
+			})();
+			// check layout
+			if(settings.layout == "fluid"){
+				$(window).resize(function(){
+					waitForFinalEvent(function(){
+						$('.'+settings.filler.filler_class).remove();
+						setup();	
+					},150)
+				});
+			}
 			setup();
 		});
 	};
