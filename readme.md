@@ -1,6 +1,7 @@
 <img src='http://drewdahlman.com/experiments/mason/logo.png'>
 ##Mason.js
-Mason.js is a jQuery plugin that allows you to create a perfect grid of elements.
+Mason.js is a jQuery plugin that allows you to create a perfect grid of elements.<br/><br/>
+This is not Masonry, or Isotope or Gridalicious. Mason fills in those ugly gaps, and creates a perfectly filled space.
 
 ##USE
 <br/><br/>
