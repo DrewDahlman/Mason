@@ -15,7 +15,7 @@
 			background-size: cover;
 		}
 		#grid{
-			width: 750px;
+			width: 700px;
 			margin: auto;
 			top: 55px;
 			padding-bottom: 55px; 
@@ -61,11 +61,21 @@
 		$(function(){
 			$("#grid").mason({
 				itemSelector: ".box",
-				ratio: 2,
+				ratio: 1.5,
 				sizes: [
 					[1,1],
 					[1,2],
 					[2,2],
+				],
+				columns: [
+					[0,480,1],
+					[480,780,2],
+					[780,1080,3],
+					[1080,1320,4],
+					[1320,1680,5]
+				],
+				promoted: [
+					[2,2,'promoted']
 				]
 			},function(){
 

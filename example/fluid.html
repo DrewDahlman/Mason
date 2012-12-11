@@ -15,10 +15,7 @@
 			background-size: cover;
 		}
 		#grid{
-			width: 750px;
-			margin: auto;
-			top: 55px;
-			padding-bottom: 55px; 
+			width: 100%; 
 			position: relative;
 			font-size: 25px;
 			font-family: 'Helvetica';
@@ -43,7 +40,7 @@
 
 		<!-- SCRIPTS -->
 		<script src='js/jQuery.js'></script>
-		<script src='js/mason.js'></script>
+		<script src='js/mason.min.js'></script>
 
 	</head>
 	<body>
@@ -57,16 +54,35 @@
 			<div class='box'>7</div>
 			<div class='box'>8</div>
 		</div>
+		<div id='fillers'>
+			<div class='fillerBox'>1</div>
+			<div class='fillerBox'>2</div>
+			<div class='fillerBox'>3</div>
+			<div class='fillerBox'>4</div>
+			<div class='fillerBox'>5</div>
+		</div>
 		<script>
 		$(function(){
 			$("#grid").mason({
 				itemSelector: ".box",
-				ratio: 2,
+				ratio: 1.5,
 				sizes: [
 					[1,1],
 					[1,2],
 					[2,2],
-				]
+				],
+				columns: [
+					[0,480,1],
+					[480,780,2],
+					[780,1080,3],
+					[1080,1320,4],
+					[1320,1680,5]
+				],
+				filler: {
+					itemSelector: '.fillerBox',
+					filler_class: 'custom_filler'
+				},
+				layout: 'fluid'
 			},function(){
 
 			});

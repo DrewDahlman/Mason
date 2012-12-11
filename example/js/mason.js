@@ -5,7 +5,7 @@
 */
 
 (function($){
-	$.fn.mason = function(options,callback) {
+	$.fn.mason = function(options) {
 
 		var defaults = {
 			itemSelector: null,
@@ -23,7 +23,7 @@
 				itemSelector: options.itemSelector,
 				filler_class: 'mason_filler'
 			},
-			layout: 'fluid'
+			layout: 'none'
 		};
 
 		var elements = {
@@ -36,7 +36,6 @@
 
 		return this.each(function() {
 			var settings = $.extend(defaults,options);
-			var callbacks = $.extend(callback,callback);
 
 			var $self = $(this);
 
@@ -175,8 +174,9 @@
 
 								// determine position
 								var x = ( i * h ).toFixed(2), 
-									y = c * w,
+									y = ( c * w ),
 									ran,filler;
+
 								ran = Math.floor( Math.random() * $(settings.filler.itemSelector).length );
 								filler = $(settings.filler.itemSelector).eq(ran).clone();
 
