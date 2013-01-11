@@ -64,10 +64,10 @@
 				}
 
 				if( columnSize() == 1){
-					$self.width( $self.width() );
+					$self.width( $self.width );
 				}
 				else {
-					$self.width( $self.width() - settings.gutter );
+					$self.width( $self.width - settings.gutter );
 				}
 				
 				elements.block.height = parseFloat( (( $self.width() / columnSize() ) / settings.ratio).toFixed(0) );
