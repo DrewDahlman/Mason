@@ -58,12 +58,17 @@
 				/*
 				 * Define our container element.
 				 * Note we append a clear div in order to get a height later on, VERY IMPORTANT!
-			    */
-			    if($(".mason_clear").length < 1){
+		    */
+		    if($(".mason_clear").length < 1){
 					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>");
 				}
 
-				$self.width( $self.width - settings.gutter );
+				if( columnSize() == 1){
+					$self.width( $self.width );
+				}
+				else {
+					$self.width( $self.width - settings.gutter );
+				}
 				
 				elements.block.height = parseFloat( (( $self.width() / columnSize() ) / settings.ratio).toFixed(0) );
 				elements.block.width = parseFloat( ( $self.width() / columnSize() ) );
@@ -82,6 +87,7 @@
 					$sel = $(settings.itemSelector);
 					$sel.height(elements.block.height);
 					$sel.width(elements.block.width);
+					$sel.css({'margin':'0px'});
 				}
 				else {
 
