@@ -5,7 +5,7 @@
 */
 
 (function($){
-	$.fn.mason = function(options) {
+	$.fn.mason = function(options,complete) {
 
 		var defaults = {
 			itemSelector: null,
@@ -23,8 +23,18 @@
 				itemSelector: options.itemSelector,
 				filler_class: 'mason_filler'
 			},
-			layout: 'none'
+			layout: 'none',
+			gutter: 0
 		};
+
+		/*
+		 * Complete Callback
+		*/
+		if(complete){
+			var callback = {
+				complete: complete
+			}
+		}
 
 		var elements = {
 			block: {
@@ -36,7 +46,8 @@
 
 		return this.each(function() {
 			var settings = $.extend(defaults,options);
-
+			var callbacks = $.extend(callback,complete);
+			
 			var $self = $(this);
 
 			/*
@@ -49,10 +60,10 @@
 				 * Note we append a clear div in order to get a height later on, VERY IMPORTANT!
 			    */
 			    if($(".mason_clear").length < 1){
-					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>")
+					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>");
 				}
-				elements.block.height = (( $self.width() / columnSize() ) / settings.ratio ).toFixed(0);
-				elements.block.width = ( $self.width() / columnSize() );
+				elements.block.height = parseFloat( (( $self.width() / columnSize() ) / settings.ratio ).toFixed(0) );
+				elements.block.width = parseFloat( ( $self.width() / columnSize() ) );
 
 				// Size Elements
 				sizeElements();
@@ -99,11 +110,13 @@
 
 						$sel.data('size',ran);
 
-						var h = ( elements.block.height * ranSize[1] ).toFixed(2);
-						var w = ( elements.block.width * ranSize[0] );
+						var h = parseFloat( ( elements.block.height * ranSize[1] ).toFixed(2) ) - settings.gutter;
+						var w = parseFloat( ( elements.block.width * ranSize[0] ) ) - settings.gutter;
 
 						$sel.height(h+'px');
 						$sel.width(w+'px');
+
+						$sel.css({'margin':(settings.gutter/2)});
 					});
 
 					/*
@@ -169,13 +182,21 @@
 							if( elements.matrix[i][c] == false){
 
 								// get block dimensions
-								var h = elements.block.height, 
-									w = elements.block.width;
+								var h = parseFloat( elements.block.height ) - settings.gutter, 
+									w = parseFloat( elements.block.width ) - settings.gutter;
 
 								// determine position
-								var x = ( i * h ).toFixed(2), 
-									y = ( c * w ),
+								var x = parseFloat( ( i * h ).toFixed(2) ) + (settings.gutter * i), 
+									y = parseFloat( ( c * w ) ) + settings.gutter,
 									ran,filler;
+
+								if(c == 0){
+									y = y - settings.gutter;
+								}
+								if(i == 0){
+									x = x - settings.gutter * i;
+								}
+
 
 								ran = Math.floor( Math.random() * $(settings.filler.itemSelector).length );
 								filler = $(settings.filler.itemSelector).eq(ran).clone();
@@ -186,6 +207,9 @@
 								filler.appendTo($self);
 							}
 						}
+					}
+					if(callbacks.complete != null){
+						callbacks.complete();
 					}
 				}
 			};

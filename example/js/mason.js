@@ -5,7 +5,7 @@
 */
 
 (function($){
-	$.fn.mason = function(options) {
+	$.fn.mason = function(options,complete) {
 
 		var defaults = {
 			itemSelector: null,
@@ -27,6 +27,15 @@
 			gutter: 0
 		};
 
+		/*
+		 * Complete Callback
+		*/
+		if(complete){
+			var callback = {
+				complete: complete
+			}
+		}
+
 		var elements = {
 			block: {
 				height: 0,
@@ -37,7 +46,8 @@
 
 		return this.each(function() {
 			var settings = $.extend(defaults,options);
-
+			var callbacks = $.extend(callback,complete);
+			
 			var $self = $(this);
 
 			/*
@@ -175,7 +185,6 @@
 								var h = parseFloat( elements.block.height ) - settings.gutter, 
 									w = parseFloat( elements.block.width ) - settings.gutter;
 
-								console.log(h)
 								// determine position
 								var x = parseFloat( ( i * h ).toFixed(2) ) + (settings.gutter * i), 
 									y = parseFloat( ( c * w ) ) + settings.gutter,
@@ -198,6 +207,9 @@
 								filler.appendTo($self);
 							}
 						}
+					}
+					if(callbacks.complete != null){
+						callbacks.complete();
 					}
 				}
 			};
