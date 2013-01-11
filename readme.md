@@ -104,6 +104,7 @@ $("#container").mason({
 </ul>
 
 ##EXAMPLES
-<a href='http://drewdahlman.com/experiments/mason/' target='_blank'>Basic</a><br/>
-<a href='http://drewdahlman.com/experiments/mason/fluid.html' target='_blank'>Fluid</a> - uses custom filler elements<br/>
-<a href='http://drewdahlman.com/experiments/mason/fixed.html' target='_blank'>Fixed</a>
+<a href='http://drewdahlman.com/experiments/Mason/fluid.html' target='_blank'>Fluid</a><br/>
+<a href='http://drewdahlman.com/experiments/Mason/fixed.html' target='_blank'>Fixed</a></br>
+<a href='http://drewdahlman.com/experiments/Mason/fixed_gutters.html' target='_blank'>Fixed Gutters</a><br/>
+<a href='http://drewdahlman.com/experiments/Mason/fluid_gutters.html' target='_blank'>Fluid Gutters</a>
