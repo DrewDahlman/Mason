@@ -54,6 +54,8 @@ $("#container").mason({
 		filler_class: 'custom_filler'
 	},
 	layout: 'fluid'
+},function(){
+	console.log("COMPLETE!")
 });
 </pre>
 <ul>
@@ -85,7 +87,12 @@ $("#container").mason({
 	</li>
 	<li><strong>Layout</strong>
 		<ul>
-			<li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be respon</li>
+			<li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be responsive.</li>
+		</ul>
+	</li>
+	<li><strong>Callback</strong>
+		<ul>
+			<li>You can add a callback function to Mason to notify you when the grid has completed building.</li>
 		</ul>
 	</li>
 </ul>
