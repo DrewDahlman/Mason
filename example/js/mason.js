@@ -106,7 +106,7 @@
 						for(var i = 0; i < settings.promoted.length; i++){
 							if( $sel.hasClass(settings.promoted[i][2]) ){
 								ranSize = [settings.promoted[i][0],settings.promoted[i][1]];
-								ran = (settings.sizes.length-1) + i;
+								ran = ((settings.sizes.length-1)-1) + i;
 							}
 						}
 
@@ -192,8 +192,9 @@
 
 								// determine position
 								var x = parseFloat( ( i * h ).toFixed(2) ) + settings.gutter, 
-									y = parseFloat( ( c * w ) ) + settings.gutter,
-									ran,filler;
+										y = parseFloat( ( c * w ) ) + settings.gutter,
+										ran,filler;
+
 
 								h = h - ( settings.gutter * 2 );
 								w = w - ( settings.gutter * 2 );
@@ -220,7 +221,7 @@
 			function columnSize(){
 				var w = Math.floor($self.width()),cols = 0,colsCount = settings.columns.length - 1;
 
-				if( w > settings.columns[colsCount][1]){
+				if( w >= settings.columns[colsCount][1]){
 					cols = settings.columns[colsCount][2];
 				}
 				else {
@@ -251,6 +252,8 @@
 			// check layout
 			if(settings.layout == "fluid"){
 				$(window).resize(function(){
+					$('.'+settings.filler.filler_class).remove();
+					elements.matrix = [];
 					waitForFinalEvent(function(){
 						$('.'+settings.filler.filler_class).remove();
 						setup();	
