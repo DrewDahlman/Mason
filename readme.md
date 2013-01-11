@@ -53,7 +53,8 @@ $("#container").mason({
 		itemSelector: '.fillerBox',
 		filler_class: 'custom_filler'
 	},
-	layout: 'fluid'
+	layout: 'fluid',
+	gutter: 10
 },function(){
 	console.log("COMPLETE!")
 });
@@ -93,6 +94,11 @@ $("#container").mason({
 	<li><strong>Callback</strong>
 		<ul>
 			<li>You can add a callback function to Mason to notify you when the grid has completed building.</li>
+		</ul>
+	</li>
+	<li><strong>Gutter</strong>
+		<ul>
+			<li>Allows you to add spacing between the elements, think of this as a margin.</li>
 		</ul>
 	</li>
 </ul>

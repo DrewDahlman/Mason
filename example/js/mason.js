@@ -62,7 +62,10 @@
 			    if($(".mason_clear").length < 1){
 					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>");
 				}
-				elements.block.height = parseFloat( (( $self.width() / columnSize() ) / settings.ratio ).toFixed(0) );
+
+				$self.width( $self.width - settings.gutter );
+				
+				elements.block.height = parseFloat( (( $self.width() / columnSize() ) / settings.ratio).toFixed(0) );
 				elements.block.width = parseFloat( ( $self.width() / columnSize() ) );
 
 				// Size Elements
@@ -110,13 +113,16 @@
 
 						$sel.data('size',ran);
 
-						var h = parseFloat( ( elements.block.height * ranSize[1] ).toFixed(2) ) - settings.gutter;
-						var w = parseFloat( ( elements.block.width * ranSize[0] ) ) - settings.gutter;
+						var h = parseFloat( ( elements.block.height * ranSize[1] ).toFixed(2) );
+						h = h - ( settings.gutter * 2 );
+
+						var w = parseFloat( ( elements.block.width * ranSize[0] ) );
+						w = w - ( settings.gutter * 2 );
 
 						$sel.height(h+'px');
 						$sel.width(w+'px');
 
-						$sel.css({'margin':(settings.gutter/2)});
+						$sel.css({'margin':(settings.gutter)});
 					});
 
 					/*
@@ -182,21 +188,16 @@
 							if( elements.matrix[i][c] == false){
 
 								// get block dimensions
-								var h = parseFloat( elements.block.height ) - settings.gutter, 
-									w = parseFloat( elements.block.width ) - settings.gutter;
+								var h = parseFloat( elements.block.height ), 
+									w = parseFloat( elements.block.width );
 
 								// determine position
-								var x = parseFloat( ( i * h ).toFixed(2) ) + (settings.gutter * i), 
+								var x = parseFloat( ( i * h ).toFixed(2) ) + settings.gutter, 
 									y = parseFloat( ( c * w ) ) + settings.gutter,
 									ran,filler;
 
-								if(c == 0){
-									y = y - settings.gutter;
-								}
-								if(i == 0){
-									x = x - settings.gutter * i;
-								}
-
+								h = h - ( settings.gutter * 2 );
+								w = w - ( settings.gutter * 2 );
 
 								ran = Math.floor( Math.random() * $(settings.filler.itemSelector).length );
 								filler = $(settings.filler.itemSelector).eq(ran).clone();

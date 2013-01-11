@@ -13,12 +13,13 @@
 			background-image: url(images/mason.jpg);
 			background-position: center;
 			background-size: cover;
+			overflow-x: hidden
 		}
 		#grid{
 			width: 700px;
 			margin: auto;
-			top: 55px;
-			padding-bottom: 55px; 
+			padding-top: 55px;
+			padding-bottom: 55px;
 			position: relative;
 			font-size: 25px;
 			font-family: 'Helvetica';
@@ -32,6 +33,12 @@
 		}
 		#fillers{
 			display: none;
+		}
+		.fillerBox {
+			background-color: #751e11;
+			box-shadow: 0px 0px 1px #222;
+			float: left;
+			position: relative;
 		}
 		</style>
 
@@ -51,6 +58,13 @@
 			<div class='box'>7</div>
 			<div class='box'>8</div>
 		</div>
+		<div id='fillers'>
+			<div class='fillerBox'>1</div>
+			<div class='fillerBox'>2</div>
+			<div class='fillerBox'>3</div>
+			<div class='fillerBox'>4</div>
+			<div class='fillerBox'>5</div>
+		</div>
 		<script>
 		$(function(){
 			$("#grid").mason({
@@ -68,12 +82,11 @@
 					[1080,1320,4],
 					[1320,1680,5]
 				],
-				promoted: [
-					[2,2,'promoted']
-				],
-				gutter: 10
-			},function(){
-
+				filler: {
+					itemSelector: '.fillerBox',
+					filler_class: 'custom_filler'
+				},
+				gutter: 2
 			});
 		});
 		</script>
