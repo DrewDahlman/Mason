@@ -62,8 +62,6 @@
 		    if($(".mason_clear").length < 1){
 					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>");
 				}
-
-				$self.width( $self.width - settings.gutter );
 				
 				elements.block.height = parseFloat( (( $self.width() / columnSize() ) / settings.ratio).toFixed(0) );
 				elements.block.width = parseFloat( ( $self.width() / columnSize() ) );
