@@ -203,7 +203,7 @@
 								filler = $(settings.filler.itemSelector).eq(ran).clone();
 
 								filler.addClass(settings.filler.filler_class);
-								filler.css({'position':'absolute','top':x+'px','left':y+'px','height':h+'px','width':w+'px'});
+								filler.css({'position':'absolute','top':x+'px','left':y+'px','height':h+'px','width':w+'px','margin':'0px'});
 
 								filler.appendTo($self);
 							}
