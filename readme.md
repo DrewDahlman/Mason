@@ -104,6 +104,6 @@ $("#container").mason({
 </ul>
 
 ##EXAMPLES
-<a href='https://drewdahlman.com/experiments/Mason/example/fluid.html' target='_blank'>Fluid</a><br/>
-<a href='https://drewdahlman.com/experiments/Mason/example/fixed.html' target='_blank'>Fixed</a><br/>
-<a href='https://drewdahlman.com/experiments/Mason/example/fluid_gutters.html' target='_blank'>Fluid Gutters</a>
+<a href='https://drewdahlman.com/experiments/mason/example/fluid.html' target='_blank'>Fluid</a><br/>
+<a href='https://drewdahlman.com/experiments/mason/example/fixed.html' target='_blank'>Fixed</a><br/>
+<a href='https://drewdahlman.com/experiments/mason/example/fluid_gutters.html' target='_blank'>Fluid Gutters</a>
