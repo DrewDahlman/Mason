@@ -261,9 +261,6 @@
 					elements.matrix = [];
 					waitForFinalEvent(function(){
 						$('.'+settings.filler.filler_class).remove();
-						settings = $.extend(defaults,options);
-						callbacks = $.extend(callback,complete);
-
 						setup();	
 					},150)
 				});
