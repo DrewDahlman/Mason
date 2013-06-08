@@ -107,3 +107,6 @@ $("#container").mason({
 <a href='https://drewdahlman.com/experiments/mason/example/fluid.html' target='_blank'>Fluid</a><br/>
 <a href='https://drewdahlman.com/experiments/mason/example/fixed.html' target='_blank'>Fixed</a><br/>
 <a href='https://drewdahlman.com/experiments/mason/example/fluid_gutters.html' target='_blank'>Fluid Gutters</a>
+
+##Updates
+6.1.13 - Updated to use filler blocks once and not repeat.

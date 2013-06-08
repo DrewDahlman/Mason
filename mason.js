@@ -1,8 +1,11 @@
-/*
- * MASON.js
- * Author: Drew Dahlman ( www.drewdahlman.com )
- * Version: 1.0
-*/
+/////////////////////////////////////////
+//
+//	MasonJS
+//	Version 1.5
+//	Author: Drew Dahlman ( www.drewdahlman.com )
+// 	MIT License
+//
+/////////////////////////////////////////
 
 (function($){
 	$.fn.mason = function(options,complete) {
@@ -43,12 +46,15 @@
 			},
 			matrix: []
 		};
+		
 
 		return this.each(function() {
-			var settings = $.extend(defaults,options);
-			var callbacks = $.extend(callback,complete);
+			var settings,callbacks,$self;
+
+			settings = $.extend(defaults,options);
+			callbacks = $.extend(callback,complete);
 			
-			var $self = $(this);
+			$self = $(this);
 
 			/*
 			 * Create Blocks and give dimensions
@@ -59,7 +65,7 @@
 				 * Define our container element.
 				 * Note we append a clear div in order to get a height later on, VERY IMPORTANT!
 		    */
-		    if($(".mason_clear").length < 1){
+		    if($self.children(".mason_clear").length < 1){
 					$self.append("<div class='mason_clear' style='clear:both;position:relative;'></div>");
 				}
 				
@@ -77,7 +83,7 @@
 				var col = columnSize();
 
 				if( col == 1){
-					$sel = $(settings.itemSelector);
+					$sel = $self.children(settings.itemSelector);
 					$sel.height(elements.block.height);
 					$sel.width(elements.block.width);
 					$sel.css({'margin':'0px'});
@@ -96,7 +102,7 @@
 					 * Loop over each element, size, place, and fill out matrix information.
 					*/
 
-					$(settings.itemSelector).each(function(){
+					$self.children(settings.itemSelector).each(function(){
 						$sel = $(this);
 						
 						// pick a random number between 0 and the length of sizes ( - the promoted size! )
@@ -144,9 +150,8 @@
 					/*
 					 * Populate the matrix
 					*/
-					$(settings.itemSelector).each(function(){
+					$self.children(settings.itemSelector).each(function(){
 						$sel = $(this);
-
 						// Start by calculating the position based on block dimensions
 						// @ t = top ( row )
 						// @ l = left ( column )
@@ -256,6 +261,9 @@
 					elements.matrix = [];
 					waitForFinalEvent(function(){
 						$('.'+settings.filler.filler_class).remove();
+						settings = $.extend(defaults,options);
+						callbacks = $.extend(callback,complete);
+
 						setup();	
 					},150)
 				});
