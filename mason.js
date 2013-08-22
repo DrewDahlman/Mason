@@ -167,8 +167,8 @@
 						var s = parseFloat($sel.data('size'));
 
 						// now determine size of the element based on block dimensions and total area
-						var h = settings.sizes[s][1];
-						var w = settings.sizes[s][0];
+						var h = settings.sizes[s-1][1];
+						var w = settings.sizes[s-1][0];
 						var a = h * w;
 
 						// Loop through the elements area and based on the size
