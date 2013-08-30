@@ -115,7 +115,7 @@
 						for (var i = 0; i < settings.promoted.length; i++) {
 							if ($sel.hasClass(settings.promoted[i][2])) {
 								ranSize = [settings.promoted[i][0], settings.promoted[i][1]];
-								ran = ((settings.sizes.length - 1) - 1) + i;
+								ran = (settings.sizes.length - settings.promoted.length) + i;
 							}
 						}
 
@@ -167,8 +167,8 @@
 						var s = parseFloat($sel.data('size'));
 
 						// now determine size of the element based on block dimensions and total area
-						var h = settings.sizes[s-1][1];
-						var w = settings.sizes[s-1][0];
+						var h = settings.sizes[s][1];
+						var w = settings.sizes[s][0];
 						var a = h * w;
 
 						// Loop through the elements area and based on the size
