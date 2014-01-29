@@ -26,8 +26,8 @@
 				itemSelector: options.itemSelector,
 				filler_class: 'mason_filler'
 			},
-			randomSizes:true,
-			randomFillers:true,
+			randomSizes:false,
+			randomFillers:false,
 			layout: 'none',
 			gutter: 0
 		};
@@ -112,14 +112,19 @@
 
 						// pick a random number between 0 and the length of sizes ( - the promoted size! )
 						//ran = Math.floor(Math.random() * (settings.sizes.length - settings.promoted.length));
+						var ran;
 						if(settings.randomSizes){
 							ran = Math.floor(Math.random() * (settings.sizes.length - settings.promoted.length));
 						}else{
+							
 							ran = $sel.data("layout");
-							if(typeof(ran)=='undefined' || !ran){
+							console.log('1'+ran);
+							if(typeof(ran)=='undefined'){
 								ran = Math.floor(Math.random() * (settings.sizes.length - settings.promoted.length));
 							}
+							console.log('2'+ran);
 						}
+						console.log('3'+ran);
 						ranSize = settings.sizes[ran];
 
 						for (var i = 0; i < settings.promoted.length; i++) {
