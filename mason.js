@@ -169,17 +169,13 @@
 						// now determine size of the element based on block dimensions and total area
 						var h = settings.sizes[s][1];
 						var w = settings.sizes[s][0];
-						var a = h * w;
 
 						// Loop through the elements area and based on the size
 						// populate the matrix.
 						// Start with rows move to columns
-						for (var i = 0; i < a; i++) {
-							for (var bh = 0; bh < h; bh++) {
-								elements.matrix[t + bh][l] = true;
-								for (var bw = 0; bw < w; bw++) {
-									elements.matrix[t + bh][l + bw] = true;
-								}
+						for (var bh = 0; bh < h; bh++) {
+							for (var bw = 0; bw < w; bw++) {
+								elements.matrix[t + bh][l + bw] = true;
 							}
 						}
 					});
