@@ -26,6 +26,8 @@
 				itemSelector: options.itemSelector,
 				filler_class: 'mason_filler'
 			},
+			randomSizes:false,
+			randomFillers:false,
 			layout: 'none',
 			gutter: 0
 		};
@@ -109,7 +111,16 @@
 						$sel = $(this);
 
 						// pick a random number between 0 and the length of sizes ( - the promoted size! )
-						ran = Math.floor(Math.random() * (settings.sizes.length - settings.promoted.length));
+						var ran;
+						if(settings.randomSizes){
+							ran = Math.floor(Math.random() * (settings.sizes.length - settings.promoted.length));
+						}else{
+							
+							ran = $sel.data("layout");
+							if(typeof(ran)=='undefined'){
+								ran = Math.floor(Math.random() * (settings.sizes.length - settings.promoted.length));
+							}
+						}
 						ranSize = settings.sizes[ran];
 
 						for (var i = 0; i < settings.promoted.length; i++) {
@@ -188,6 +199,7 @@
 					 * Create filler blocks to seal up empty spaces based on matrix
 					 * This goes column by column to analyze true / false booleans in matrix
 					 */
+					var fillerNum = $(settings.filler.itemSelector).length;
 					for (var i = 0; i < elements.matrix.length; i++) {
 						for (var c = 0; c < elements.matrix[i].length; c++) {
 
@@ -209,7 +221,13 @@
 								h = h - (settings.gutter * 2);
 								w = w - (settings.gutter * 2);
 
-								ran = Math.floor(Math.random() * $(settings.filler.itemSelector).length);
+
+								if(settings.randomFillers){
+									ran = Math.floor(Math.random() * $(settings.filler.itemSelector).length);
+								}else{
+									ran =  fillerNum -1;
+								}
+								
 								filler = $(settings.filler.itemSelector).eq(ran).clone();
 
 								filler.addClass(settings.filler.filler_class);
