@@ -15,10 +15,21 @@ class Application
   | Construct.
   *----------------------------------------###
   constructor: ->
-    console.log('Application Constructor!')
+    $("#grid").mason({
+      itemSelector: '.block'
+      ratio: 1.5
+      sizes: [
+        [1,1],
+        [1,2],
+        [2,2]
+      ]
+      layout: 'fluid'
+    })
 
 module.exports = Application
 
 $ ->
+  window.App = {}
+
   # instance
-  Namespace.instance = new Application()
+  App.instance = new Application()

@@ -16,7 +16,12 @@ Application = (function() {
   *----------------------------------------
    */
   function Application() {
-    console.log('Application Constructor!');
+    $("#grid").mason({
+      itemSelector: '.block',
+      ratio: 1.5,
+      sizes: [[1, 1], [1, 2], [2, 2]],
+      layout: 'fluid'
+    });
   }
 
   return Application;
@@ -26,7 +31,8 @@ Application = (function() {
 module.exports = Application;
 
 $(function() {
-  return Namespace.instance = new Application();
+  window.App = {};
+  return App.instance = new Application();
 });
 
 

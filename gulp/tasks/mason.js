@@ -12,6 +12,6 @@ gulp.task('mason', function() {
     .on('error', handleErrors)
     .pipe(source('mason.js'))
     .pipe(gulp.dest('./public/js'))
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./dist/'));
 });
 

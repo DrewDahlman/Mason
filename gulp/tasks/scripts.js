@@ -18,12 +18,21 @@ var browserify = require('browserify'),
     source = require('vinyl-source-stream');
 
 gulp.task('scripts', function() {
-  return browserify({
+  browserify({
       entries: ['./src/app.coffee'],
       extensions: ['.coffee']
     })
     .bundle()
     .on('error', handleErrors)
     .pipe(source('app.js'))
+    .pipe(gulp.dest('./public/js'));
+
+  browserify({
+      entries: ['./src/mason.coffee'],
+      extensions: ['.coffee']
+    })
+    .bundle()
+    .on('error', handleErrors)
+    .pipe(source('mason.js'))
     .pipe(gulp.dest('./public/js'));
 });

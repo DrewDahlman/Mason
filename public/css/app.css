@@ -16,17 +16,21 @@ html, body {
 }
 
 body {
-  background-color: #131313;
+  background-color: white;
+  font-family: "Arial";
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
 }
-
-h1 {
-  margin: 20px;
-  color: #666666;
-  font: bold normal normal 24px/24px "helvetica neue", helvetica, sans-serif;
+body #grid {
+  position: relative;
+  width: 100%;
 }
-
-img {
-  margin: 0 20px;
+body .block {
+  position: relative;
+  float: left;
+  height: 10px;
+  width: 10px;
+  background-color: #2979ff;
+  color: white;
+  padding: 10px;
 }

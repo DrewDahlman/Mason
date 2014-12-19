@@ -7,7 +7,26 @@ Author: Drew Dahlman
 Version: 2.0.0
 License: MIT
  */
-
+(function($) {
+  return $.fn.mason = function(options, complete) {
+    var defaults;
+    defaults = {
+      itemSelector: '',
+      ratio: 0,
+      sizes: [],
+      columns: [[0, 480, 1], [480, 780, 2], [780, 1080, 3], [1080, 1320, 4], [1320, 1680, 5]],
+      promoted: [],
+      filler: {
+        itemSelector: options.itemSelector,
+        filler_class: 'mason_filler'
+      },
+      randomSizes: false,
+      randomFillers: false,
+      layout: 'none',
+      gutter: 0
+    };
+  };
+})(jQuery);
 
 
 
