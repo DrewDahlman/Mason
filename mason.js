@@ -24,7 +24,8 @@
 			promoted: [],
 			filler: {
 				itemSelector: options.itemSelector,
-				filler_class: 'mason_filler'
+				filler_class: 'mason_filler',
+				keepDataAndEvents: false
 			},
 			randomSizes:false,
 			randomFillers:false,
@@ -228,7 +229,7 @@
 									ran =  fillerNum -1;
 								}
 								
-								filler = $(settings.filler.itemSelector).eq(ran).clone();
+								filler = $(settings.filler.itemSelector).eq(ran).clone(settings.filler.keepDataAndEvents);
 
 								filler.addClass(settings.filler.filler_class);
 								filler.css({
