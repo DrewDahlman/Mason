@@ -16,12 +16,19 @@ class Application
   *----------------------------------------###
   constructor: ->
     $("#grid").mason({
-      itemSelector: '.block'
-      ratio: 1.5
+      itemSelector: '.block',
+      ratio: 1.5,
       sizes: [
         [1,1],
-        [2,2]
-      ]
+        [1,2],
+        [2,2],
+        [2,1]
+      ],
+      filler: {
+        itemSelector: '.filler',
+        filler_class: 'mason_filler'
+      },
+      randomFillers: false
       layout: 'fluid',
       gutter: 1,
       debug: true

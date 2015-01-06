@@ -21,11 +21,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
 }
+body #fillers {
+  display: none;
+}
 body #grid {
   position: relative;
   width: 100%;
 }
-body #grid .block {
+body #grid .block,
+body #grid .mason_filler {
   position: relative;
   display: block;
   float: left;
@@ -33,4 +37,7 @@ body #grid .block {
   width: 10px;
   background-color: #2979ff;
   color: white;
+}
+body #grid .mason_filler {
+  background-color: #4fc3f7;
 }

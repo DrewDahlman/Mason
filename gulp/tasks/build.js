@@ -10,6 +10,6 @@
 
 var gulp = require('gulp');
 
-gulp.task('build',['copy', 'scripts', 'mason', 'styles'], function() {
+gulp.task('build',['copy', 'scripts', 'styles'], function() {
   gulp.start('usemin');
 });

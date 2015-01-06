@@ -45,7 +45,7 @@ License: MIT
       matrix: []
     };
     this.each(function() {
-      var $self, callbacks, columnSize, debug, layBricks, mason, settings, setup, sizeElements;
+      var $self, callbacks, columnSize, debounce, debug, layBricks, mason, settings, setup, sizeElements;
       settings = $.extend(defaults, options);
       callbacks = $.extend(callback, complete);
       $self = $(this);
@@ -135,8 +135,10 @@ License: MIT
         return layBricks();
       };
       layBricks = function() {
-        var $filler, c, end, h, r, w, x, y;
+        var $filler, c, end, filler_index, filler_total, h, r, w, x, y;
         r = 0;
+        filler_total = $("" + settings.filler.itemSelector).length;
+        filler_index = -1;
         while (r < elements.matrix.length) {
           c = 0;
           while (c < elements.matrix[r].length) {
@@ -147,7 +149,17 @@ License: MIT
               y = (c * w) + settings.gutter;
               h = h - settings.gutter * 2;
               w = w - settings.gutter * 2;
-              $filler = $(settings.itemSelector).eq(0).clone();
+              if (settings.randomFillers) {
+                filler_index = Math.floor(Math.random() * $("" + settings.filler.itemSelector).length);
+              } else {
+                if (filler_index < filler_total) {
+                  filler_index++;
+                }
+                if (filler_index === filler_total) {
+                  filler_index = 0;
+                }
+              }
+              $filler = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).eq(filler_index).clone();
               $filler.addClass(settings.filler.filler_class);
               $filler.css({
                 position: 'absolute',
@@ -220,7 +232,30 @@ License: MIT
         debug_elements.container.append(mason_clear);
         return $debug.prepend(debug_elements.container);
       };
-      return setup();
+      debounce = function(uid, ms, callback) {
+        var bounce, timers;
+        timers = {};
+        bounce = (function(_this) {
+          return function() {
+            if (timers[uid]) {
+              clearTimeout(timers[uid]);
+            }
+            timers[uid] = setTimeout(callback, ms);
+            return false;
+          };
+        })(this);
+        return bounce();
+      };
+      setup();
+      if (settings.layout === "fluid") {
+        return $(window).on('resize', (function(_this) {
+          return function(event) {
+            return debounce("resize", 250, function() {
+              return console.log("complete");
+            });
+          };
+        })(this));
+      }
     });
   };
 })(jQuery);

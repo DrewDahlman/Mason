@@ -139,7 +139,7 @@ License: MIT
 				#	If there is only 1 column ( mobile ) size all elements
 				#
 				if columnSize() == 1
-					$block = $self.children(settings.itemSelector)
+					$block = $self.children("#{settings.itemSelector}")
 					$block.height(elements.block.height)
 					$block.width(elements.block.width)
 					$block.css
@@ -153,7 +153,7 @@ License: MIT
 					#
 					#	Loop over each element, size, place and fill out the matrix
 					#
-					$self.children(settings.itemSelector).each ->
+					$self.children("#{settings.itemSelector}", ".#{settings.filler.filler_class}").each ->
 						$block = $(@)
 
 						#
@@ -220,7 +220,7 @@ License: MIT
 				#
 				#	Populate the matrix
 				#
-				$self.children(settings.itemSelector).each ->
+				$self.children("#{settings.itemSelector}").each ->
 					$block = $(@)
 
 					#
@@ -272,7 +272,13 @@ License: MIT
 			#------------------------------------------------------------------------------
 			layBricks = ->
 
+				#
+				#	r - Row index
+				#	filler_index - The index of the filler object
+				#
 				r = 0
+				filler_total = $("#{settings.filler.itemSelector}").length
+				filler_index = -1
 
 				# Loop over each row
 				while r < elements.matrix.length
@@ -303,9 +309,28 @@ License: MIT
 							h = h - settings.gutter * 2
 							w = w - settings.gutter * 2
 
-							$filler = $(settings.itemSelector).eq(0).clone()
+							#
+							#	Check to see if a filler has been specified or random fillers are on
+							#
+							if settings.randomFillers
+								filler_index = Math.floor(Math.random() * $("#{settings.filler.itemSelector}").length)
+							else
+								if filler_index < filler_total
+									filler_index++
+								
+								if filler_index == filler_total
+									filler_index = 0
+
+							#
+							#	Assign filler
+							#
+							$filler = $("#{settings.filler.itemSelector}").not(".#{settings.filler.filler_class}").eq(filler_index).clone()
+
 							$filler.addClass(settings.filler.filler_class)
 
+							#
+							#	Position the filler 
+							#
 							$filler.css
 								position: 'absolute'
 								top: x + 'px'
@@ -314,6 +339,9 @@ License: MIT
 								width: w + 'px'
 								margin: '0px'
 
+							#
+							#	Append filler
+							#
 							$filler.appendTo($self)
 
 						c++
@@ -408,6 +436,21 @@ License: MIT
 				# Place the container
 				$debug.prepend(debug_elements.container)
 
+			#------------------------------------------------------------------------------
+			#
+			#	Debounce
+			#
+			#------------------------------------------------------------------------------
+			debounce = (uid, ms, callback) ->
+				timers = {}
+				if !uid
+					uid = 
+
+				if timers[uid]
+					clearTimeout(timers[uid])
+
+				timers[uid] = setTimeout(callback, ms)
+				false
 
 			#------------------------------------------------------------------------------
 			#
@@ -415,6 +458,17 @@ License: MIT
 			#
 			#------------------------------------------------------------------------------
 			setup()
+
+			#------------------------------------------------------------------------------
+			#
+			#	Resize
+			#
+			#------------------------------------------------------------------------------
+			if settings.layout == "fluid"
+				$(window).on 'resize', (event) =>
+					debounce(250, () =>
+						setup()
+					)	
 		)
 
 

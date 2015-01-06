@@ -22,11 +22,5 @@ gulp.task('usemin', function() {
       css: [minifycss()]
     }))
     .pipe(gulp.dest('tests/'));
-
-  gulp.src('public/js/mason.js')
-    .pipe(usemin({
-      js: [uglify()]
-    }))
-    .pipe(gulp.dest('dist/'));
 });
 
