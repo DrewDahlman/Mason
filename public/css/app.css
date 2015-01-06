@@ -25,12 +25,12 @@ body #grid {
   position: relative;
   width: 100%;
 }
-body .block {
+body #grid .block {
   position: relative;
+  display: block;
   float: left;
   height: 10px;
   width: 10px;
   background-color: #2979ff;
   color: white;
-  padding: 10px;
 }

@@ -34,7 +34,20 @@ License: MIT
 			randomSizes: false
 			randomFillers: false
 			layout: 'none'
-			gutter: 0
+			gutter: 0,
+			debug: false
+		}
+
+		start = Date.now()
+
+		#------------------------------------------------------------------------------
+		#
+		#  Debug Elements
+		#
+		#------------------------------------------------------------------------------
+		debug_elements = {
+			container: $("<div id='debug'></div>")
+			block: "<div class='mason-debug' style='background-color: rgba(244, 67, 54, .5); float: left;'></div>"
 		}
 
 		#------------------------------------------------------------------------------
@@ -80,9 +93,12 @@ License: MIT
 			# create reference to the jQuery object
 			$self = $(@)
 
+			#------------------------------------------------------------------------------
 			#
 			#	Setup
+			#	Do inital setup to get sizing 
 			#
+			#------------------------------------------------------------------------------
 			setup = ->
 
 				#
@@ -95,29 +111,34 @@ License: MIT
 				#
 				#	Set the element block height
 				#
-				elements.block.height = parseFloat((($self.width() / columnSize()) / settings.ratio).toFixed(0))
+				elements.block.height = Math.floor((($self.width() / columnSize()) / settings.ratio).toFixed(0))
 
 				#
 				#	Set the element block width
 				#
-				elements.block.width = parseFloat(($self.width() / columnSize()))
+				elements.block.width = Math.floor(($self.width() / columnSize())).toFixed(0)
 
 				sizeElements()
 
-			sizeElements = ->
+				#
+				#	If the debug flag is on create an element and fill it to show the grid
+				#
+				if settings.debug
+					console.log "############## Running In Debug Mode ##############"
+					debug()
 
-				#
-				#	Set some default sizes and numbers
-				#
-				col = columnSize()
-				el_h = $self.height()
-				block_h = (el_h / elements.block.height)
-				elements.matrix = []
+			#------------------------------------------------------------------------------
+			#
+			#	Size Elements
+			#	Size and setup inital placement
+			#
+			#------------------------------------------------------------------------------
+			sizeElements = ->
 
 				#
 				#	If there is only 1 column ( mobile ) size all elements
 				#
-				if col == 1
+				if columnSize() == 1
 					$block = $self.children(settings.itemSelector)
 					$block.height(elements.block.height)
 					$block.width(elements.block.width)
@@ -129,27 +150,16 @@ License: MIT
 				#
 				else
 
-					# #	TODO - Look to remove
-					# #	Push our promoted sizes into our sizes
-					# #
-					# i = 0
-					# while i < settings.promoted.length
-					# 	settings.sizes.push([
-					# 		settings.promoted[i][0], 
-					# 		settings.promoted[i][1]
-					# 	])
-					# 	i++
-
 					#
 					#	Loop over each element, size, place and fill out the matrix
 					#
-					$self.children(settings.itemSelector).each( ->
+					$self.children(settings.itemSelector).each ->
 						$block = $(@)
 
 						#
 						#	Pick random number between 0 and the length of sizes
 						#
-						ran = Math.floor(Math.random() * settings.sizes.length
+						ran = Math.floor(Math.random() * settings.sizes.length)
 						ranSize = settings.sizes[ran]
 
 						#
@@ -160,10 +170,10 @@ License: MIT
 						#
 						#	Calculate the height and width of the block
 						#
-						h = parseFloat((element.block.height * ranSize[1].toFixed(2)))
+						h = parseFloat((elements.block.height * ranSize[1])).toFixed(2)
 						h = h - settings.gutter * 2
 
-						w = parseFloat((element.block.width * ranSize[2].toFixed(2))
+						w = parseFloat((elements.block.width * ranSize[0])).toFixed(2)
 						w = w - settings.gutter * 2
 
 						$block.height(h + 'px')
@@ -171,19 +181,161 @@ License: MIT
 
 						$block.css
 							'margin': settings.gutter
-					)
 
-					
-					i = 0
-					while i < block_h
-						elements.matrix[i] = []
-						c = 0
-						while c < col
-							elements.matrix[i][c] = false
-							c++
-						i++
+					mason()
 
 
+			#------------------------------------------------------------------------------
+			#
+			#	Mason
+			#	Do the logic to place and fill out the matrix
+			#
+			#------------------------------------------------------------------------------
+			mason = ->
+
+				#
+				#	Set some default sizes and numbers
+				#
+				col = columnSize()
+				el_h = $self.height()
+				block_h = el_h / elements.block.height
+				elements.matrix = []
+				
+				#
+				#	Loop over blocks and fill out the matrix with booleans
+				#	Defaults to false first then we will do logic to set true
+				#	based on the position of the blocks.
+				#
+				r = 0
+				while r < block_h
+					# Create the row
+					elements.matrix[r] = []
+					c = 0
+					while c < col
+						# Create the columns
+						elements.matrix[r][c] = false
+						c++
+					r++
+
+				#
+				#	Populate the matrix
+				#
+				$self.children(settings.itemSelector).each ->
+					$block = $(@)
+
+					#
+					#	Calculate position based around dimensions
+					#	t - top
+					#	l - left
+					#	s - data size
+					#
+					l = Math.round($block.position().left / elements.block.width)
+					t = Math.round($block.position().top / elements.block.height)
+					s = parseFloat($block.data('size'))
+
+					#
+					#	Get the element dimentions
+					#	h - Height
+					#	w - Width
+					#	a - Area
+					#
+					h = settings.sizes[s][1]
+					w = settings.sizes[s][0]
+					a = h * w
+
+					#
+					#	Loop through the elements area and based on the size
+					#	populate the matrix.
+					#
+					#	NOTE: Star with rows then move to columns
+					#
+					r = 0
+					while r < a
+						bh = 0
+						while bh < h
+							bw = 0
+							elements.matrix[t + bh][l] = true
+							while bw < w
+								elements.matrix[t + bh][l + bw] = true
+								bw++
+							bh++
+						r++
+
+				layBricks()
+
+			#------------------------------------------------------------------------------
+			#
+			#	Lay Bricks
+			#	This is where mason fills in those gaps.
+			#	If a filler has not been supplied Mason will use the current elements
+			#
+			#------------------------------------------------------------------------------
+			layBricks = ->
+
+				r = 0
+
+				# Loop over each row
+				while r < elements.matrix.length
+
+					# Loop over row columns
+					c = 0
+					while c < elements.matrix[r].length
+
+						# If the area is false in the matrix that means it is empty
+						# so we need to fill it.
+						if !elements.matrix[r][c]
+
+							#
+							#	Calculate the height and width of the block
+							#
+							h = elements.block.height
+							w = elements.block.width
+
+							#
+							#	Get the correct placement
+							#
+							x = ( r * h ) + settings.gutter
+							y = ( c * w ) + settings.gutter
+
+							#
+							#	Adjust the height and width for the grid
+							#
+							h = h - settings.gutter * 2
+							w = w - settings.gutter * 2
+
+							$filler = $(settings.itemSelector).eq(0).clone()
+							$filler.addClass(settings.filler.filler_class)
+
+							$filler.css
+								position: 'absolute'
+								top: x + 'px'
+								left: y + 'px'
+								height: h + 'px'
+								width: w + 'px'
+								margin: '0px'
+
+							$filler.appendTo($self)
+
+						c++
+					r++
+
+
+				#
+				#	Complete Callback
+				#
+				if typeof callbacks.complete != "undefined"
+					callbacks.complete()
+
+				if settings.debug
+					end = Date.now()
+					console.log "Finished in: " + (end - start) + "ms"
+
+			#------------------------------------------------------------------------------
+			#
+			#	Column Size
+			#	Determine the column size and count based on screen sizes and settings
+			#
+			#------------------------------------------------------------------------------
 			columnSize = ->
 				w = Math.floor($self.width())
 				cols = 0
@@ -202,6 +354,59 @@ License: MIT
 						i++
 
 				return cols
+
+			#------------------------------------------------------------------------------
+			#
+			#	DEBUG
+			#	Debug can be run by adding the 'debug' flag to true. This will draw out
+			#	the area that mason understands it needs to fill.
+			#
+			#------------------------------------------------------------------------------
+			debug = ->
+				
+				#
+				#	Set some default sizes and numbers
+				#
+				$debug = $self.parent()
+				col = columnSize()
+				el_h = $self.height()
+				block_h = el_h / elements.block.height
+
+				# Copy over styles from the master grid
+				debug_elements.container.css
+					position: 'absolute'
+					top: '0'
+					left: '0'
+					height: $self.height()
+					width: $self.width()
+
+				#
+				#	Loop over blocks and fill out the matrix with booleans
+				#	Defaults to false first then we will do logic to set true
+				#	based on the position of the blocks.
+				#
+				i = 0
+				while i < block_h
+					c = 0
+					while c < col
+						block = $(debug_elements.block)
+
+						# Size the blocks
+						block.css
+							height: elements.block.height - ( settings.gutter * 2 )
+							width: elements.block.width - ( settings.gutter * 2 )
+							margin: settings.gutter
+						
+						debug_elements.container.append(block)
+
+						c++
+					i++
+
+				# Place clearfix
+				debug_elements.container.append(mason_clear)
+
+				# Place the container
+				$debug.prepend(debug_elements.container)
 
 
 			#------------------------------------------------------------------------------
