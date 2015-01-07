@@ -10,5 +10,10 @@
 cd into project and run `gulp`
 
 ## Building
-cd into project and run `gulp dist`
+cd into project 
+1. run `gulp dist`
+2. run `gulp finish_dist`
+
+## Examples
+Look at the public folder for examples.
 

@@ -12,4 +12,4 @@
 
 var gulp = require('gulp');
 
-gulp.task('default', ['mason', 'scripts', 'styles', 'serve', 'watch']);
+gulp.task('default', ['scripts', 'styles', 'serve', 'watch']);

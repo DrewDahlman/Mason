@@ -11,5 +11,5 @@
 var gulp = require('gulp');
 
 gulp.task('dist', ['clean'], function() {
-  gulp.start('build');
+  gulp.start('mason_dist');
 });

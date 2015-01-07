@@ -11,7 +11,7 @@
 var gulp  = require('gulp'),
     clean = require('gulp-clean');
 
-gulp.task('clean', function() {
-  return gulp.src(['examples/', 'public/css/', 'public/js/', 'dist/'], {read: false})
+gulp.task('clean_dist', function() {
+  return gulp.src(['examples/'], {read: false})
     .pipe(clean());
 });

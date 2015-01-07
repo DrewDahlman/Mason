@@ -1,25 +1,9 @@
-var browserify = require('browserify'),
-    gulp = require('gulp'),
-    handleErrors = require('../util/handleErrors'),
-    source = require('vinyl-source-stream');
+var gulp = require('gulp'),
+    usemin = require('gulp-usemin'),
+    uglify = require('gulp-uglify'),
+    minifycss = require('gulp-minify-css');
 
-gulp.task('mason_dist', function() {
-  // gulp.src([
-  //   'tests/scripts/mason.js']
-  // )
-  // .pipe(gulp.dest('dist/'));
-
-  // gulp.src([
-  //   'tests/scripts/mason.min.js']
-  // )
-  // .pipe(gulp.dest('dist/'));
-  return browserify({
-    entries: ['./public/mason.js'],
-    extensions: ['.js']
-  })
-  .bundle()
-  .on('error', handleErrors)
-  .pipe(source('mason.js'))
-  .pipe(gulp.dest('./dist/'));
+gulp.task('mason_dist', ['build'], function() {
+  gulp.start('finish_dist');
 });
 

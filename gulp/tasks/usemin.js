@@ -21,6 +21,6 @@ gulp.task('usemin', function() {
       js: [uglify()],
       css: [minifycss()]
     }))
-    .pipe(gulp.dest('tests/'));
+    .pipe(gulp.dest('examples/'));
 });
 

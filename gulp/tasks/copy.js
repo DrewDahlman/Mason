@@ -26,5 +26,5 @@ gulp.task('copy', function() {
   	'!public/vendor/**/*'], 
   	{read: false}
   )
-  .pipe(gulp.dest('tests/'));
+  .pipe(gulp.dest('examples/'));
 });

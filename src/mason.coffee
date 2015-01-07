@@ -86,7 +86,7 @@ License: MIT
 		#  MasonJS Core
 		#
 		#------------------------------------------------------------------------------
-		@each( ->
+		@each ->
 			settings = $.extend(defaults, options)
 			callbacks = $.extend(callback, complete)
 
@@ -157,24 +157,55 @@ License: MIT
 						$block = $(@)
 
 						#
-						#	Pick random number between 0 and the length of sizes
+						#	Check to see if block is promoted and if so promote it
 						#
-						ran = Math.floor(Math.random() * settings.sizes.length)
-						ranSize = settings.sizes[ran]
+						p = 0
+						promoted = false
+						promoted_size = 0
+						while p < settings.promoted.length
+							if $block.hasClass(settings.promoted[p][0])
+								promoted = true
+								promoted_size = p
+							p++
 
-						#
-						#	Assign the size to the block element
-						#
-						$block.data('size', ran)
+						if promoted
+							size = settings.promoted[promoted_size]
 
-						#
-						#	Calculate the height and width of the block
-						#
-						h = parseFloat((elements.block.height * ranSize[1])).toFixed(2)
-						h = h - settings.gutter * 2
+							#
+							#	Assign the size to the block element
+							#
+							$block.data('size', promoted_size)
+							$block.data('promoted', true)
 
-						w = parseFloat((elements.block.width * ranSize[0])).toFixed(2)
-						w = w - settings.gutter * 2
+							#
+							#	Calculate the height and width of the block
+							#
+							h = parseFloat((elements.block.height * size[2])).toFixed(2)
+							h = h - settings.gutter * 2
+
+							w = parseFloat((elements.block.width * size[1])).toFixed(2)
+							w = w - settings.gutter * 2
+
+						else
+							#
+							#	Pick random number between 0 and the length of sizes
+							#
+							ran = Math.floor(Math.random() * settings.sizes.length)
+							size = settings.sizes[ran]
+
+							#
+							#	Assign the size to the block element
+							#
+							$block.data('size', ran)
+
+							#
+							#	Calculate the height and width of the block
+							#
+							h = parseFloat((elements.block.height * size[1])).toFixed(2)
+							h = h - settings.gutter * 2
+
+							w = parseFloat((elements.block.width * size[0])).toFixed(2)
+							w = w - settings.gutter * 2
 
 						$block.height(h + 'px')
 						$block.width(w + 'px')
@@ -239,9 +270,15 @@ License: MIT
 					#	w - Width
 					#	a - Area
 					#
-					h = settings.sizes[s][1]
-					w = settings.sizes[s][0]
-					a = h * w
+					if $block.data('promoted')
+						h = settings.promoted[s][2]
+						w = settings.promoted[s][1]
+						a = h * w
+					else
+						h = settings.sizes[s][1]
+						w = settings.sizes[s][0]
+						a = h * w
+
 
 					#
 					#	Loop through the elements area and based on the size
@@ -444,20 +481,13 @@ License: MIT
 			debounce = (uid, ms, callback) ->
 				timers = {}
 				if !uid
-					uid = 
+					uid = Math.random()
 
 				if timers[uid]
 					clearTimeout(timers[uid])
 
 				timers[uid] = setTimeout(callback, ms)
 				false
-
-			#------------------------------------------------------------------------------
-			#
-			#  Let 'er rip!
-			#
-			#------------------------------------------------------------------------------
-			setup()
 
 			#------------------------------------------------------------------------------
 			#
@@ -469,8 +499,13 @@ License: MIT
 					debounce(250, () =>
 						setup()
 					)	
-		)
 
+			#------------------------------------------------------------------------------
+			#
+			#  Let 'er rip!
+			#
+			#------------------------------------------------------------------------------
+			setup()
 
 		return
 ) jQuery

@@ -64,23 +64,43 @@ License: MIT
       sizeElements = function() {
         var $block;
         if (columnSize() === 1) {
-          $block = $self.children(settings.itemSelector);
+          $block = $self.children("" + settings.itemSelector);
           $block.height(elements.block.height);
           $block.width(elements.block.width);
           return $block.css({
             'margin': '0px'
           });
         } else {
-          $self.children(settings.itemSelector).each(function() {
-            var h, ran, ranSize, w;
+          $self.children("" + settings.itemSelector, "." + settings.filler.filler_class).each(function() {
+            var h, p, promoted, promoted_size, ran, size, w;
             $block = $(this);
-            ran = Math.floor(Math.random() * settings.sizes.length);
-            ranSize = settings.sizes[ran];
-            $block.data('size', ran);
-            h = parseFloat(elements.block.height * ranSize[1]).toFixed(2);
-            h = h - settings.gutter * 2;
-            w = parseFloat(elements.block.width * ranSize[0]).toFixed(2);
-            w = w - settings.gutter * 2;
+            p = 0;
+            promoted = false;
+            promoted_size = 0;
+            while (p < settings.promoted.length) {
+              if ($block.hasClass(settings.promoted[p][0])) {
+                promoted = true;
+                promoted_size = p;
+              }
+              p++;
+            }
+            if (promoted) {
+              size = settings.promoted[promoted_size];
+              $block.data('size', promoted_size);
+              $block.data('promoted', true);
+              h = parseFloat(elements.block.height * size[2]).toFixed(2);
+              h = h - settings.gutter * 2;
+              w = parseFloat(elements.block.width * size[1]).toFixed(2);
+              w = w - settings.gutter * 2;
+            } else {
+              ran = Math.floor(Math.random() * settings.sizes.length);
+              size = settings.sizes[ran];
+              $block.data('size', ran);
+              h = parseFloat(elements.block.height * size[1]).toFixed(2);
+              h = h - settings.gutter * 2;
+              w = parseFloat(elements.block.width * size[0]).toFixed(2);
+              w = w - settings.gutter * 2;
+            }
             $block.height(h + 'px');
             $block.width(w + 'px');
             return $block.css({
@@ -106,15 +126,21 @@ License: MIT
           }
           r++;
         }
-        $self.children(settings.itemSelector).each(function() {
+        $self.children("" + settings.itemSelector).each(function() {
           var $block, a, bh, bw, h, l, s, t, w, _results;
           $block = $(this);
           l = Math.round($block.position().left / elements.block.width);
           t = Math.round($block.position().top / elements.block.height);
           s = parseFloat($block.data('size'));
-          h = settings.sizes[s][1];
-          w = settings.sizes[s][0];
-          a = h * w;
+          if ($block.data('promoted')) {
+            h = settings.promoted[s][2];
+            w = settings.promoted[s][1];
+            a = h * w;
+          } else {
+            h = settings.sizes[s][1];
+            w = settings.sizes[s][0];
+            a = h * w;
+          }
           r = 0;
           _results = [];
           while (r < a) {
@@ -233,29 +259,27 @@ License: MIT
         return $debug.prepend(debug_elements.container);
       };
       debounce = function(uid, ms, callback) {
-        var bounce, timers;
+        var timers;
         timers = {};
-        bounce = (function(_this) {
-          return function() {
-            if (timers[uid]) {
-              clearTimeout(timers[uid]);
-            }
-            timers[uid] = setTimeout(callback, ms);
-            return false;
-          };
-        })(this);
-        return bounce();
+        if (!uid) {
+          uid = Math.random();
+        }
+        if (timers[uid]) {
+          clearTimeout(timers[uid]);
+        }
+        timers[uid] = setTimeout(callback, ms);
+        return false;
       };
-      setup();
       if (settings.layout === "fluid") {
-        return $(window).on('resize', (function(_this) {
+        $(window).on('resize', (function(_this) {
           return function(event) {
-            return debounce("resize", 250, function() {
-              return console.log("complete");
+            return debounce(250, function() {
+              return setup();
             });
           };
         })(this));
       }
+      return setup();
     });
   };
 })(jQuery);
