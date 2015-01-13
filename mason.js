@@ -91,7 +91,7 @@
 					$sel.height(elements.block.height);
 					$sel.width(elements.block.width);
 					$sel.css({
-						'margin': '0px'
+						'margin': '0 0 ' + settings.gutter + 'px'
 					});
 				} else {
 
