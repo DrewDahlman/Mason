@@ -37,6 +37,8 @@ body #grid .mason_filler {
   width: 10px;
   background-color: #2979ff;
   color: white;
+  -webkit-transition: left 0.35s, top 0.35s;
+  transition: left 0.35s, top 0.35s;
 }
 body #grid .mason_filler {
   background-color: #4fc3f7;

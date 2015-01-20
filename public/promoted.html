@@ -16,17 +16,17 @@
 	<body>
 
 		<div id='grid'>
-			<div class='block'>1</div>
-			<div class='block'>2</div>
-			<div class='block'>3</div>
-			<div class='block'>4</div>
-			<div class='block'>5</div>
-			<div class='block'>6</div>
-			<div class='block'>7</div>
-			<div class='block'>8</div>
-			<div class='block'>9</div>
-			<div class='block'>10</div>
-			<div class='block'>11</div>
+			<div class='block xl'>XL 1</div>
+			<div class='block l'>L 2</div>
+			<div class='block w'>W 3</div>
+			<div class='block l'>4</div>
+			<div class='block xl'>XL 5</div>
+			<div class='block xl'>6</div>
+			<div class='block w'>W 7</div>
+			<div class='block w'>W 8</div>
+			<div class='block l'>9</div>
+			<div class='block xl'>XL 10</div>
+			<div class='block w'>11</div>
 		</div>
 
 		<div id='fillers'>
@@ -55,18 +55,17 @@
 		      itemSelector: '.block',
 		      ratio: 1.5,
 		      sizes: [
+		        [1,1],
 		        [1,2],
-		        [2,1],
-		        [2,2]
+		        [2,1]
 		      ],
-		      filler: {
-		        itemSelector: '.filler',
-		        filler_class: 'mason_filler'
-		      },
-		      randomFillers: false,
-		      layout: 'fluid',
+		      promoted: [
+		        ['w', 3, 1],
+		        ['xl', 3, 3],
+		        ['l', 2, 2]
+		      ],
 		      gutter: 1,
-		      debug: false
+		      layout: 'fluid'
 		    })
 		});
 		</script>

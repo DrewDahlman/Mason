@@ -100,6 +100,8 @@ License: MIT
 			#
 			#------------------------------------------------------------------------------
 			setup = ->
+				if settings.debug
+					console.log "SETUP"
 
 				#
 				#	Check to see if a clear is in place yet or not
@@ -350,7 +352,7 @@ License: MIT
 							#	Check to see if a filler has been specified or random fillers are on
 							#
 							if settings.randomFillers
-								filler_index = Math.floor(Math.random() * $("#{settings.filler.itemSelector}").length)
+								filler_index = Math.floor(Math.random() * filler_total)
 							else
 								if filler_index < filler_total
 									filler_index++
@@ -495,11 +497,20 @@ License: MIT
 			#
 			#------------------------------------------------------------------------------
 			if settings.layout == "fluid"
-				$(window).on 'resize', (event) =>
-					debounce(250, () =>
-						setup()
-					)	
+				resize = null
 
+				$(window).on 'resize', (event) =>
+					$(".#{settings.filler.filler_class}").remove()
+					
+					# clearTimeout(resize)
+					# resize = null
+
+					# resize = setTimeout( =>
+					# 	setup()
+					# ,250)
+
+					setup()
+					
 			#------------------------------------------------------------------------------
 			#
 			#  Let 'er rip!

@@ -45,11 +45,14 @@ License: MIT
       matrix: []
     };
     this.each(function() {
-      var $self, callbacks, columnSize, debounce, debug, layBricks, mason, settings, setup, sizeElements;
+      var $self, callbacks, columnSize, debounce, debug, layBricks, mason, resize, settings, setup, sizeElements;
       settings = $.extend(defaults, options);
       callbacks = $.extend(callback, complete);
       $self = $(this);
       setup = function() {
+        if (settings.debug) {
+          console.log("SETUP");
+        }
         if ($self.children(".mason_clear").length < 1) {
           $self.append(mason_clear);
         }
@@ -176,7 +179,7 @@ License: MIT
               h = h - settings.gutter * 2;
               w = w - settings.gutter * 2;
               if (settings.randomFillers) {
-                filler_index = Math.floor(Math.random() * $("" + settings.filler.itemSelector).length);
+                filler_index = Math.floor(Math.random() * filler_total);
               } else {
                 if (filler_index < filler_total) {
                   filler_index++;
@@ -271,11 +274,11 @@ License: MIT
         return false;
       };
       if (settings.layout === "fluid") {
+        resize = null;
         $(window).on('resize', (function(_this) {
           return function(event) {
-            return debounce(250, function() {
-              return setup();
-            });
+            $("." + settings.filler.filler_class).remove();
+            return setup();
           };
         })(this));
       }
