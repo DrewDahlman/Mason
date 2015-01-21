@@ -53,7 +53,8 @@ $("#container").mason({
 	],
 	filler: {
 		itemSelector: '.fillerBox',
-		filler_class: 'custom_filler'
+		filler_class: 'custom_filler',
+		keepDataAndEvents: false
 	},
 	layout: 'fluid',
 	gutter: 10
@@ -86,6 +87,7 @@ $("#container").mason({
 		<ul>
 			<li>itemSelector: This describes the elements to be used to fill in blank spaces. This will default to the original itemSelector if there is nothing</li>
 			<li>filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid</li>
+			<li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells  Mason to retain the events and data that have already been bound to the filler elements</li>
 		</ul>
 	</li>
 	<li><strong>Layout</strong>
