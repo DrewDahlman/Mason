@@ -49,6 +49,11 @@
 			<div class='filler'>filler 3</div>
 			<div class='filler'>filler 4</div>
 			<div class='filler'>filler 5</div>
+			<div class='filler'>filler 6</div>
+			<div class='filler'>filler 7</div>
+			<div class='filler'>filler 8</div>
+			<div class='filler'>filler 9</div>
+			<div class='filler'>filler 10</div>
 		</div>
 
 		<!-- build:js scripts/vendor.min.js -->
@@ -76,7 +81,7 @@
 		        ['xl', 3, 3],
 		        ['l', 2, 2]
 		      ],
-		      gutter: 1,
+		      gutter: 5,
 		      layout: 'fluid'
 		    });
 
@@ -91,7 +96,11 @@
 		        ['xl', 3, 3],
 		        ['l', 2, 2]
 		      ],
-		      gutter: 1,
+  		      filler: {
+		        itemSelector: '.filler',
+		        filler_class: 'mason_filler'
+		      },
+		      gutter: 5,
 		      layout: 'fluid'
 		    })
 		});

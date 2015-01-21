@@ -24,6 +24,7 @@ License: MIT
       randomFillers: false,
       layout: 'none',
       gutter: 0,
+      keepDataAndEvents: false,
       debug: false
     };
     start = Date.now();
@@ -188,7 +189,7 @@ License: MIT
                   filler_index = 0;
                 }
               }
-              $filler = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).eq(filler_index).clone();
+              $filler = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).eq(filler_index).clone(settings.keepDataAndEvents);
               $filler.addClass(settings.filler.filler_class);
               $filler.css({
                 position: 'absolute',
@@ -275,10 +276,15 @@ License: MIT
       };
       if (settings.layout === "fluid") {
         resize = null;
-        $(window).on('resize', (function(_this) {
+        $(window, $self).on('resize', (function(_this) {
           return function(event) {
             $("." + settings.filler.filler_class).remove();
-            return setup();
+            elements.matrix = [];
+            clearTimeout(resize);
+            resize = null;
+            return resize = setTimeout(function() {
+              return setup();
+            }, 0);
           };
         })(this));
       }

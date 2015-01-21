@@ -34,7 +34,8 @@ License: MIT
 			randomSizes: false
 			randomFillers: false
 			layout: 'none'
-			gutter: 0,
+			gutter: 0
+			keepDataAndEvents: false
 			debug: false
 		}
 
@@ -363,7 +364,7 @@ License: MIT
 							#
 							#	Assign filler
 							#
-							$filler = $("#{settings.filler.itemSelector}").not(".#{settings.filler.filler_class}").eq(filler_index).clone()
+							$filler = $("#{settings.filler.itemSelector}").not(".#{settings.filler.filler_class}").eq(filler_index).clone(settings.keepDataAndEvents)
 
 							$filler.addClass(settings.filler.filler_class)
 
@@ -499,17 +500,18 @@ License: MIT
 			if settings.layout == "fluid"
 				resize = null
 
-				$(window).on 'resize', (event) =>
+				$(window, $self).on 'resize', (event) =>
 					$(".#{settings.filler.filler_class}").remove()
+					elements.matrix = []
 					
-					# clearTimeout(resize)
-					# resize = null
+					clearTimeout(resize)
+					resize = null
 
-					# resize = setTimeout( =>
-					# 	setup()
-					# ,250)
+					resize = setTimeout( =>
+						setup()
+					,0)
 
-					setup()
+					# setup()
 					
 			#------------------------------------------------------------------------------
 			#
