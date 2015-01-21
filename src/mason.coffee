@@ -142,10 +142,10 @@ License: MIT
 				#
 				if columnSize() == 1
 					$block = $self.children("#{settings.itemSelector}")
-					$block.height(elements.block.height)
-					$block.width(elements.block.width)
+					$block.height(elements.block.height - (settings.gutter * 2))
+					$block.width(elements.block.width - (settings.gutter))
 					$block.css
-						'margin': '0px'
+						'margin': settings.gutter / 2
 				
 				#
 				#	More than 1 column do some math fool!

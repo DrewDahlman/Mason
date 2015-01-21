@@ -68,10 +68,10 @@ License: MIT
         var $block;
         if (columnSize() === 1) {
           $block = $self.children("" + settings.itemSelector);
-          $block.height(elements.block.height);
-          $block.width(elements.block.width);
+          $block.height(elements.block.height - (settings.gutter * 2));
+          $block.width(elements.block.width - settings.gutter);
           return $block.css({
-            'margin': '0px'
+            'margin': settings.gutter / 2
           });
         } else {
           $self.children("" + settings.itemSelector, "." + settings.filler.filler_class).each(function() {
