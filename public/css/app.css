@@ -24,12 +24,15 @@ body {
 body #fillers {
   display: none;
 }
-body #grid {
+body #grid,
+body #grid_b {
   position: relative;
   width: 100%;
 }
 body #grid .block,
-body #grid .mason_filler {
+body #grid .mason_filler,
+body #grid_b .block,
+body #grid_b .mason_filler {
   position: relative;
   display: block;
   float: left;
@@ -40,6 +43,7 @@ body #grid .mason_filler {
   -webkit-transition: left 0.35s, top 0.35s;
   transition: left 0.35s, top 0.35s;
 }
-body #grid .mason_filler {
+body #grid .mason_filler,
+body #grid_b .mason_filler {
   background-color: #4fc3f7;
 }

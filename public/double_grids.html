@@ -28,6 +28,21 @@
 			<div class='block xl'>XL 10</div>
 			<div class='block w'>11</div>
 		</div>
+
+		<div id='grid_b'>
+			<div class='block xl'>B XL 1</div>
+			<div class='block l'>B L 2</div>
+			<div class='block w'>B W 3</div>
+			<div class='block l'>B 4</div>
+			<div class='block xl'>B XL 5</div>
+			<div class='block xl'>B 6</div>
+			<div class='block w'>B W 7</div>
+			<div class='block w'>B W 8</div>
+			<div class='block l'>B 9</div>
+			<div class='block xl'>B XL 10</div>
+			<div class='block w'>B 11</div>
+		</div>
+
 		<div id='fillers'>
 			<div class='filler'>filler 1</div>
 			<div class='filler'>filler 2</div>
@@ -54,9 +69,22 @@
 		      itemSelector: '.block',
 		      ratio: 1.5,
 		      sizes: [
-		        [1,1],
-		        [1,2],
-		        [2,1]
+		        [1,1]
+		      ],
+		      promoted: [
+		        ['w', 3, 1],
+		        ['xl', 3, 3],
+		        ['l', 2, 2]
+		      ],
+		      gutter: 1,
+		      layout: 'fluid'
+		    });
+
+		    $("#grid_b").mason({
+		      itemSelector: '.block',
+		      ratio: 1.5,
+		      sizes: [
+		        [1,1]
 		      ],
 		      promoted: [
 		        ['w', 3, 1],
