@@ -311,7 +311,7 @@ License: MIT
           };
         })(this));
       }
-      return $(window).trigger('resize');
+      return setup();
     });
   };
 })(jQuery);

@@ -556,8 +556,7 @@ License: MIT
 			#  Let 'er rip!
 			#
 			#------------------------------------------------------------------------------
-			# setup()
-			$(window).trigger('resize')
+			setup()
 
 		return
 ) jQuery

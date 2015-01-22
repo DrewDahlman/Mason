@@ -46,7 +46,7 @@ License: MIT
       matrix: []
     };
     this.each(function() {
-      var $self, callbacks, columnSize, debounce, debug, layBricks, mason, resize, settings, setup, sizeElements;
+      var $self, callbacks, columnSize, debounce, debug, getScrollbarWidth, layBricks, mason, resize, settings, setup, sizeElements;
       settings = $.extend(defaults, options);
       callbacks = $.extend(callback, complete);
       $self = $(this);
@@ -69,10 +69,10 @@ License: MIT
         var $block, end;
         if (columnSize() === 1) {
           $block = $self.children("" + settings.itemSelector);
-          $block.height(elements.block.height - (settings.gutter * 2));
+          $block.height(elements.block.height - settings.gutter);
           $block.width(elements.block.width - settings.gutter);
           $block.css({
-            'margin': settings.gutter / 2
+            'margin': settings.gutter
           });
           if (typeof callbacks.complete !== "undefined") {
             callbacks.complete();
@@ -100,17 +100,17 @@ License: MIT
               $block.data('size', promoted_size);
               $block.data('promoted', true);
               h = parseFloat(elements.block.height * size[2]).toFixed(2);
-              h = h - settings.gutter * 2;
+              h = h - (settings.gutter * 2);
               w = parseFloat(elements.block.width * size[1]).toFixed(2);
-              w = w - settings.gutter * 2;
+              w = w - (settings.gutter * 2);
             } else {
               ran = Math.floor(Math.random() * settings.sizes.length);
               size = settings.sizes[ran];
               $block.data('size', ran);
               h = parseFloat(elements.block.height * size[1]).toFixed(2);
-              h = h - settings.gutter * 2;
+              h = h - (settings.gutter * 2);
               w = parseFloat(elements.block.width * size[0]).toFixed(2);
-              w = w - settings.gutter * 2;
+              w = w - (settings.gutter * 2);
             }
             $block.height(h + 'px');
             $block.width(w + 'px');
@@ -280,6 +280,22 @@ License: MIT
         }
         timers[uid] = setTimeout(callback, ms);
         return false;
+      };
+      getScrollbarWidth = function() {
+        var inner, outer, widthNoScroll, widthWithScroll;
+        outer = document.createElement("div");
+        outer.style.visibility = "hidden";
+        outer.style.width = "100px";
+        outer.style.msOverflowStyle = "scrollbar";
+        document.body.appendChild(outer);
+        widthNoScroll = outer.offsetWidth;
+        outer.style.overflow = "scroll";
+        inner = document.createElement("div");
+        inner.style.width = "100%";
+        outer.appendChild(inner);
+        widthWithScroll = inner.offsetWidth;
+        outer.parentNode.removeChild(outer);
+        return widthNoScroll - widthWithScroll;
       };
       if (settings.layout === "fluid") {
         resize = null;
