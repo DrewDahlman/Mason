@@ -14,7 +14,7 @@
 
 	</head>
 	<body>
-
+	<div id='wrapper'>
 		<div id='grid'>
 			<div class='block xl'>XL 1</div>
 			<div class='block l'>L 2</div>
@@ -29,20 +29,6 @@
 			<div class='block w'>11</div>
 		</div>
 
-		<div id='grid_b'>
-			<div class='block xl'>B XL 1</div>
-			<div class='block l'>B L 2</div>
-			<div class='block w'>B W 3</div>
-			<div class='block l'>B 4</div>
-			<div class='block xl'>B XL 5</div>
-			<div class='block xl'>B 6</div>
-			<div class='block w'>B W 7</div>
-			<div class='block w'>B W 8</div>
-			<div class='block l'>B 9</div>
-			<div class='block xl'>B XL 10</div>
-			<div class='block w'>B 11</div>
-		</div>
-
 		<div id='fillers'>
 			<div class='filler'>filler 1</div>
 			<div class='filler'>filler 2</div>
@@ -55,6 +41,8 @@
 			<div class='filler'>filler 9</div>
 			<div class='filler'>filler 10</div>
 		</div>
+	</div>
+		<button id='add-more' onclick='addMore()'>Add More</button>
 
 		<!-- build:js scripts/vendor.min.js -->
 		<script src="/vendor/jquery/dist/jquery.js"></script>
@@ -81,9 +69,29 @@
 		        ['xl', 3, 3],
 		        ['l', 2, 2]
 		      ],
-		      gutter: 5,
+		      gutter: 10,
 		      layout: 'fluid'
 		    });
+
+		});
+
+		function addMore(){
+			var new_grid = "<div id='grid_b'>"+
+			"<div class='block xl'>B XL 1</div>"+
+			"<div class='block l'>B L 2</div>"+
+			"<div class='block w'>B W 3</div>"+
+			"<div class='block l'>B 4</div>"+
+			"<div class='block xl'>B XL 5</div>"+
+			"<div class='block xl'>B 6</div>"+
+			"<div class='block w'>B W 7</div>"+
+			"<div class='block w'>B W 8</div>"+
+			"<div class='block l'>B 9</div>"+
+			"<div class='block xl'>B XL 10</div>"+
+			"<div class='block w'>B 11</div>"+
+			"</div>";
+
+			$('#wrapper').append(new_grid);
+			$('button').remove()
 
 		    $("#grid_b").mason({
 		      itemSelector: '.block',
@@ -100,10 +108,11 @@
 		        itemSelector: '.filler',
 		        filler_class: 'mason_filler'
 		      },
-		      gutter: 5,
+		      gutter: 10,
 		      layout: 'fluid'
 		    })
-		});
+
+		}
 		</script>
 
 	</body>

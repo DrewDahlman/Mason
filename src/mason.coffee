@@ -101,6 +101,7 @@ License: MIT
 			#
 			#------------------------------------------------------------------------------
 			setup = ->
+				# console.log $self.width() - getScrollbarWidth()
 				if settings.debug
 					console.log "SETUP"
 
@@ -143,10 +144,10 @@ License: MIT
 				#
 				if columnSize() == 1
 					$block = $self.children("#{settings.itemSelector}")
-					$block.height(elements.block.height - (settings.gutter * 2))
-					$block.width(elements.block.width - (settings.gutter))
+					$block.height(elements.block.height - settings.gutter)
+					$block.width(elements.block.width - settings.gutter)
 					$block.css
-						'margin': settings.gutter / 2
+						'margin': settings.gutter
 
 					#
 					#	Complete Callback
@@ -194,10 +195,10 @@ License: MIT
 							#	Calculate the height and width of the block
 							#
 							h = parseFloat((elements.block.height * size[2])).toFixed(2)
-							h = h - settings.gutter * 2
+							h = h - (settings.gutter * 2)
 
 							w = parseFloat((elements.block.width * size[1])).toFixed(2)
-							w = w - settings.gutter * 2
+							w = w - (settings.gutter * 2)
 
 						else
 							#
@@ -215,10 +216,10 @@ License: MIT
 							#	Calculate the height and width of the block
 							#
 							h = parseFloat((elements.block.height * size[1])).toFixed(2)
-							h = h - settings.gutter * 2
+							h = h - (settings.gutter * 2)
 
 							w = parseFloat((elements.block.width * size[0])).toFixed(2)
-							w = w - settings.gutter * 2
+							w = w - (settings.gutter * 2)
 
 						$block.height(h + 'px')
 						$block.width(w + 'px')
@@ -504,6 +505,33 @@ License: MIT
 
 			#------------------------------------------------------------------------------
 			#
+			#  Get Scrollbar Width
+			#  This is an issue where if there is a scrollbar it needs to be accounted for
+			#
+			#------------------------------------------------------------------------------
+			getScrollbarWidth = () ->
+				outer = document.createElement("div")
+				outer.style.visibility = "hidden"
+				outer.style.width = "100px"
+				outer.style.msOverflowStyle = "scrollbar" # needed for WinJS apps
+				document.body.appendChild outer
+				widthNoScroll = outer.offsetWidth
+
+				# force scrollbars
+				outer.style.overflow = "scroll"
+
+				# add innerdiv
+				inner = document.createElement("div")
+				inner.style.width = "100%"
+				outer.appendChild inner
+				widthWithScroll = inner.offsetWidth
+
+				# remove divs
+				outer.parentNode.removeChild outer
+				widthNoScroll - widthWithScroll
+
+			#------------------------------------------------------------------------------
+			#
 			#	Resize
 			#
 			#------------------------------------------------------------------------------
@@ -528,7 +556,8 @@ License: MIT
 			#  Let 'er rip!
 			#
 			#------------------------------------------------------------------------------
-			setup()
+			# setup()
+			$(window).trigger('resize')
 
 		return
 ) jQuery
