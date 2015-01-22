@@ -174,7 +174,7 @@ License: MIT
       layBricks = function() {
         var $filler, c, end, filler_index, filler_total, h, r, w, x, y;
         r = 0;
-        filler_total = $("" + settings.filler.itemSelector).length;
+        filler_total = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).length;
         filler_index = -1;
         while (r < elements.matrix.length) {
           c = 0;

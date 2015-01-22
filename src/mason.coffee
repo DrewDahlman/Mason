@@ -328,7 +328,7 @@ License: MIT
 				#	filler_index - The index of the filler object
 				#
 				r = 0
-				filler_total = $("#{settings.filler.itemSelector}").length
+				filler_total = $("#{settings.filler.itemSelector}").not(".#{settings.filler.filler_class}").length
 				filler_index = -1
 
 				# Loop over each row
