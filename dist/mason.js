@@ -18,13 +18,13 @@ License: MIT
       promoted: [],
       filler: {
         itemSelector: options.itemSelector,
-        filler_class: 'mason_filler'
+        filler_class: 'mason_filler',
+        keepDataAndEvents: false
       },
       randomSizes: false,
       randomFillers: false,
       layout: 'none',
       gutter: 0,
-      keepDataAndEvents: false,
       debug: false
     };
     start = Date.now();
@@ -66,14 +66,21 @@ License: MIT
         }
       };
       sizeElements = function() {
-        var $block;
+        var $block, end;
         if (columnSize() === 1) {
           $block = $self.children("" + settings.itemSelector);
           $block.height(elements.block.height - (settings.gutter * 2));
           $block.width(elements.block.width - settings.gutter);
-          return $block.css({
+          $block.css({
             'margin': settings.gutter / 2
           });
+          if (typeof callbacks.complete !== "undefined") {
+            callbacks.complete();
+          }
+          if (settings.debug) {
+            end = Date.now();
+            return console.log("Finished in: " + (end - start) + "ms");
+          }
         } else {
           $self.children("" + settings.itemSelector, "." + settings.filler.filler_class).each(function() {
             var h, p, promoted, promoted_size, ran, size, w;
@@ -189,7 +196,7 @@ License: MIT
                   filler_index = 0;
                 }
               }
-              $filler = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).eq(filler_index).clone(settings.keepDataAndEvents);
+              $filler = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).eq(filler_index).clone(settings.filler.keepDataAndEvents);
               $filler.addClass(settings.filler.filler_class);
               $filler.css({
                 position: 'absolute',

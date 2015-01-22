@@ -30,12 +30,12 @@ License: MIT
 			filler: {
 				itemSelector: options.itemSelector
 				filler_class: 'mason_filler'
+				keepDataAndEvents: false
 			}
 			randomSizes: false
 			randomFillers: false
 			layout: 'none'
 			gutter: 0
-			keepDataAndEvents: false
 			debug: false
 		}
 
@@ -147,6 +147,16 @@ License: MIT
 					$block.width(elements.block.width - (settings.gutter))
 					$block.css
 						'margin': settings.gutter / 2
+
+					#
+					#	Complete Callback
+					#
+					if typeof callbacks.complete != "undefined"
+						callbacks.complete()
+
+					if settings.debug
+						end = Date.now()
+						console.log "Finished in: " + (end - start) + "ms"
 				
 				#
 				#	More than 1 column do some math fool!
@@ -364,7 +374,7 @@ License: MIT
 							#
 							#	Assign filler
 							#
-							$filler = $("#{settings.filler.itemSelector}").not(".#{settings.filler.filler_class}").eq(filler_index).clone(settings.keepDataAndEvents)
+							$filler = $("#{settings.filler.itemSelector}").not(".#{settings.filler.filler_class}").eq(filler_index).clone(settings.filler.keepDataAndEvents)
 
 							$filler.addClass(settings.filler.filler_class)
 
