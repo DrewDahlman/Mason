@@ -537,7 +537,6 @@ License: MIT
 			#------------------------------------------------------------------------------
 			if settings.layout == "fluid"
 				resize = null
-				console.log "stuff"
 				$(window, $self).on 'resize', (event) =>
 					$(".#{settings.filler.filler_class}").remove()
 					elements.matrix = []

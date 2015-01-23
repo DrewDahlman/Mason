@@ -299,7 +299,6 @@ License: MIT
       };
       if (settings.layout === "fluid") {
         resize = null;
-        console.log("stuff");
         $(window, $self).on('resize', (function(_this) {
           return function(event) {
             $("." + settings.filler.filler_class).remove();
