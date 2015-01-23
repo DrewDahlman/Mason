@@ -69,8 +69,8 @@ License: MIT
         var $block, end;
         if (columnSize() === 1) {
           $block = $self.children("" + settings.itemSelector);
-          $block.height(elements.block.height - settings.gutter);
-          $block.width(elements.block.width - settings.gutter);
+          $block.height(elements.block.height - (settings.gutter * 2));
+          $block.width(elements.block.width - (settings.gutter * 2));
           $block.css({
             'margin': settings.gutter
           });
@@ -299,6 +299,7 @@ License: MIT
       };
       if (settings.layout === "fluid") {
         resize = null;
+        console.log("stuff");
         $(window, $self).on('resize', (function(_this) {
           return function(event) {
             $("." + settings.filler.filler_class).remove();
