@@ -1,2 +1,4 @@
 .DS_Store
-.DS_store
+node_modules/
+archive/
+.sass-cache/

@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 <img src='http://drewdahlman.com/experiments/mason/logo.png'>
 ##Mason.js
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/DrewDahlman/Mason?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+=======
+## MasonJS
+>>>>>>> 2.0
 Mason.js is a jQuery plugin that allows you to create a perfect grid of elements.<br/><br/>
 This is not Masonry, or Isotope or Gridalicious. Mason fills in those ugly gaps, and creates a perfectly filled space.
 
@@ -51,6 +55,11 @@ $("#container").mason({
 		[1080,1320,4],
 		[1320,1680,5]
 	],
+	promoted: [
+		['class_name', 2, 1],
+		['class_name', 2, 3],
+		['class_name', 3, 3],
+	],
 	filler: {
 		itemSelector: '.fillerBox',
 		filler_class: 'custom_filler',
@@ -70,7 +79,7 @@ $("#container").mason({
 	</li>
 	<li><strong>ratio</strong>
 		<ul>
-			<li>The ratio is a number that is used to create the blocks based on column count and width.</li>
+			<li>The ratio is a number that is used to create the blocks based on column count and width. This is based on the number of columns requested and the browser width.</li>
 		</ul>
 	</li>
 	<li><strong>sizes</strong>
@@ -87,7 +96,16 @@ $("#container").mason({
 		<ul>
 			<li>itemSelector: This describes the elements to be used to fill in blank spaces. This will default to the original itemSelector if there is nothing</li>
 			<li>filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid</li>
+<<<<<<< HEAD
 			<li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells  Mason to retain the events and data that have already been bound to the filler elements</li>
+=======
+			<li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells Mason to retain the events and data that have already been bound to the filler elements</li>
+		</ul>
+	</li>
+	<li><strong>promoted</strong>
+		<ul>
+		<li>Accepts an array of ['CLASS_NAME', WIDTH, HEIGHT] these items will be forced to those dimentsions.</li>
+>>>>>>> 2.0
 		</ul>
 	</li>
 	<li><strong>Layout</strong>
@@ -107,5 +125,25 @@ $("#container").mason({
 	</li>
 </ul>
 
-##Updates
-6.1.13 - Updated to use filler blocks once and not repeat.
+## DESTROY
+At times you may want to destroy the mason object and no longer track window changes, to do this assign the mason grid to a variable such as `var mason` and when you're ready to destroy just call `mason.destroy()` this will remove all listeners on the mason object and you can remove the grid or elements without any ill effects.
+
+## Install
+1. `npm install`
+
+2. `bower install`
+
+## Running
+cd into project and run `gulp`
+
+## Building
+cd into project 
+
+1. run `gulp dist`
+
+2. run `gulp finish_dist`
+
+## Examples
+Look at the public folder for examples.
+
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html class="no-js weak" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>MasonJS</title>
+		<meta name="author" content="Drew Dahlman (http://www.drewdahlman.com)">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- build:css styles/style.css -->
+		<link rel="stylesheet" href="/css/app.css">
+		<!-- endbuild -->
+
+	</head>
+	<body>
+
+		<div id='grid'>
+			<div class='block xl'>XL 1</div>
+			<div class='block l'>L 2</div>
+			<div class='block w'>W 3</div>
+			<div class='block l'>4</div>
+			<div class='block xl'>XL 5</div>
+			<div class='block xl'>6</div>
+			<div class='block w'>W 7</div>
+			<div class='block w'>W 8</div>
+			<div class='block l'>9</div>
+			<div class='block xl'>XL 10</div>
+			<div class='block w'>11</div>
+		</div>
+
+		<div id='fillers'>
+			<div class='filler'>filler 1</div>
+			<div class='filler'>filler 2</div>
+			<div class='filler'>filler 3</div>
+			<div class='filler'>filler 4</div>
+			<div class='filler'>filler 5</div>
+		</div>
+
+		<!-- build:js scripts/vendor.min.js -->
+		<script src="/vendor/jquery/dist/jquery.js"></script>
+		<!-- endbuild -->
+
+		<!-- build:js scripts/app.min.js -->
+		<script src="/js/app.js"></script>
+		<!-- endbuild -->
+
+		<!-- build:js scripts/mason.min.js -->
+		<script src="/js/mason.js"></script>
+		<!-- endbuild -->
+
+		<script>
+		//////////////////////////////////////////////
+		//
+		//	PROMOTED FILLER
+		//	This shows how promoted works with fillers
+		//
+		//////////////////////////////////////////////
+		$(function(){
+			$("#grid").mason({
+		      itemSelector: '.block',
+		      ratio: 1.5,
+		      sizes: [
+		        [1,1],
+		        [1,2],
+		        [2,1]
+		      ],
+		      promoted: [
+		        ['w', 3, 1],
+		        ['xl', 3, 3],
+		        ['l', 2, 2]
+		      ],
+		      filler: {
+		        itemSelector: '.filler',
+		        filler_class: 'mason_filler'
+		      },
+		      randomFillers: false,
+		      layout: 'fluid',
+		      gutter: 1
+		    })
+		});
+		</script>
+
+	</body>
+</html>
