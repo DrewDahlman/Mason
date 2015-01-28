@@ -2,7 +2,6 @@ html, body
 	width: 100%
 
 body
-	background-color: #fff
 	font:
 		family: "Arial"
 
@@ -13,22 +12,23 @@ body
 		display: none
 
 	#grid,
-	#grid_b
+	#grid_b,
+	#grid-fixed
 		position: relative
 		width: 100%
 
 		.block, 
 		.mason_filler
 			position: relative
-			display: block
 			float: left
-			height: 10px
-			width: 10px
 			background:
 				color: #2979ff
 			color: #fff
-			transition: left .35s, top .35s
 
 		.mason_filler
 			background:
 				color: #4fc3f7
+
+	#grid-fixed
+		width: 800px
+		margin: auto

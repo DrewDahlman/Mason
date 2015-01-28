@@ -14,56 +14,15 @@
 
 	</head>
 	<body>
-
-		<div id='grid'>
-			<div class='block'>1</div>
-			<div class='block'>2</div>
-			<div class='block'>3</div>
-			<div class='block'>4</div>
-			<div class='block'>5</div>
-			<div class='block'>6</div>
-			<div class='block'>7</div>
-			<div class='block'>8</div>
-			<div class='block'>9</div>
-			<div class='block'>10</div>
-			<div class='block'>11</div>
-		</div>
-
-		<!-- build:js scripts/vendor.min.js -->
-		<script src="/vendor/jquery/dist/jquery.js"></script>
-		<!-- endbuild -->
-
-		<!-- build:js scripts/app.min.js -->
-		<script src="/js/app.js"></script>
-		<!-- endbuild -->
-
-		<!-- build:js scripts/mason.min.js -->
-		<script src="/js/mason.js"></script>
-		<!-- endbuild -->
-
-		<script>
-
-		//////////////////////////////////////////////
-		//
-		//	BASIC Example
-		//	This example is the most basic,
-		//	it is using all default options.
-		//
-		//////////////////////////////////////////////
-		
-		$(function(){
-			$("#grid").mason({
-		      itemSelector: '.block',
-		      ratio: 1.5,
-		      sizes: [
-		        [1,2],
-		        [2,1],
-		        [2,2]
-		      ],
-		      layout: 'fluid'
-		    })
-		});
-		</script>
-
+		<h1>Examples:</h1>
+		<ul>
+			<li><a href='/fluid.html'>Fluid</a></li>
+			<li><a href='/fixed.html'>Fixed</a></li>
+			<li><a href='/gutters.html'>Gutters</a></li>
+			<li><a href='/promoted.html'>Promoted</a></li>
+			<li><a href='/promoted_fillers.html'>Promoted Fillers</a></li>
+			<li><a href='/random_fillers.html'>Random Fillers</a></li>
+			<li><a href='/double_grids.html'>Double Grids</a></li>
+		</ul>
 	</body>
 </html>

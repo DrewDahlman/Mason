@@ -15,7 +15,6 @@ html, body {
 }
 
 body {
-  background-color: white;
   font-family: "Arial";
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: none;
@@ -24,25 +23,28 @@ body #fillers {
   display: none;
 }
 body #grid,
-body #grid_b {
+body #grid_b,
+body #grid-fixed {
   position: relative;
   width: 100%;
 }
 body #grid .block,
 body #grid .mason_filler,
 body #grid_b .block,
-body #grid_b .mason_filler {
+body #grid_b .mason_filler,
+body #grid-fixed .block,
+body #grid-fixed .mason_filler {
   position: relative;
-  display: block;
   float: left;
-  height: 10px;
-  width: 10px;
   background-color: #2979ff;
   color: white;
-  -webkit-transition: left 0.35s, top 0.35s;
-  transition: left 0.35s, top 0.35s;
 }
 body #grid .mason_filler,
-body #grid_b .mason_filler {
+body #grid_b .mason_filler,
+body #grid-fixed .mason_filler {
   background-color: #4fc3f7;
+}
+body #grid-fixed {
+  width: 800px;
+  margin: auto;
 }

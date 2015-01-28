@@ -80,6 +80,7 @@ License: MIT
 				width: 0
 			}
 			matrix: []
+			startWidth: 0
 		}
 
 		#------------------------------------------------------------------------------
@@ -115,12 +116,18 @@ License: MIT
 				#
 				#	Set the element block height
 				#
-				elements.block.height = Math.floor((($self.width() / columnSize()) / settings.ratio).toFixed(0))
+				elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(0)
 
 				#
 				#	Set the element block width
 				#
-				elements.block.width = Math.floor(($self.width() / columnSize())).toFixed(0)
+				elements.block.width = parseFloat(($self.width() / columnSize())).toFixed(0)
+
+				#
+				#	Set Start Width
+				#
+				elements.startWidth = $self.width()
+
 
 				sizeElements()
 
@@ -194,10 +201,10 @@ License: MIT
 							#
 							#	Calculate the height and width of the block
 							#
-							h = parseFloat((elements.block.height * size[2])).toFixed(2)
+							h = parseFloat((elements.block.height * size[2])).toFixed(0)
 							h = h - (settings.gutter * 2)
 
-							w = parseFloat((elements.block.width * size[1])).toFixed(2)
+							w = parseFloat((elements.block.width * size[1])).toFixed(0)
 							w = w - (settings.gutter * 2)
 
 						else
@@ -215,10 +222,10 @@ License: MIT
 							#
 							#	Calculate the height and width of the block
 							#
-							h = parseFloat((elements.block.height * size[1])).toFixed(2)
+							h = parseFloat((elements.block.height * size[1])).toFixed(0)
 							h = h - (settings.gutter * 2)
 
-							w = parseFloat((elements.block.width * size[0])).toFixed(2)
+							w = parseFloat((elements.block.width * size[0])).toFixed(0)
 							w = w - (settings.gutter * 2)
 
 						$block.height(h + 'px')
@@ -398,16 +405,21 @@ License: MIT
 						c++
 					r++
 
-
 				#
-				#	Complete Callback
+				#	Check start width and if different remeasure
 				#
-				if typeof callbacks.complete != "undefined"
-					callbacks.complete()
+				if $self.width() < elements.startWidth
+					$(window, $self).trigger('resize')
+				else
+					#
+					#	Complete Callback
+					#
+					if typeof callbacks.complete != "undefined"
+						callbacks.complete()
 
-				if settings.debug
-					end = Date.now()
-					console.log "Finished in: " + (end - start) + "ms"
+					if settings.debug
+						end = Date.now()
+						console.log "Finished in: " + (end - start) + "ms"
 
 			#------------------------------------------------------------------------------
 			#
@@ -416,7 +428,7 @@ License: MIT
 			#
 			#------------------------------------------------------------------------------
 			columnSize = ->
-				w = Math.floor($self.width())
+				w = parseFloat($self.width())
 				cols = 0
 				colsCount = settings.columns.length - 1
 
@@ -432,7 +444,7 @@ License: MIT
 							cols = settings.columns[i][2]
 						i++
 
-				return cols
+				return Math.floor(cols)
 
 			#------------------------------------------------------------------------------
 			#
@@ -502,33 +514,6 @@ License: MIT
 
 				timers[uid] = setTimeout(callback, ms)
 				false
-
-			#------------------------------------------------------------------------------
-			#
-			#  Get Scrollbar Width
-			#  This is an issue where if there is a scrollbar it needs to be accounted for
-			#
-			#------------------------------------------------------------------------------
-			getScrollbarWidth = () ->
-				outer = document.createElement("div")
-				outer.style.visibility = "hidden"
-				outer.style.width = "100px"
-				outer.style.msOverflowStyle = "scrollbar" # needed for WinJS apps
-				document.body.appendChild outer
-				widthNoScroll = outer.offsetWidth
-
-				# force scrollbars
-				outer.style.overflow = "scroll"
-
-				# add innerdiv
-				inner = document.createElement("div")
-				inner.style.width = "100%"
-				outer.appendChild inner
-				widthWithScroll = inner.offsetWidth
-
-				# remove divs
-				outer.parentNode.removeChild outer
-				widthNoScroll - widthWithScroll
 
 			#------------------------------------------------------------------------------
 			#

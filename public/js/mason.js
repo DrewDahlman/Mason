@@ -43,10 +43,11 @@ License: MIT
         height: 0,
         width: 0
       },
-      matrix: []
+      matrix: [],
+      startWidth: 0
     };
     this.each(function() {
-      var $self, callbacks, columnSize, debounce, debug, getScrollbarWidth, layBricks, mason, resize, settings, setup, sizeElements;
+      var $self, callbacks, columnSize, debounce, debug, layBricks, mason, resize, settings, setup, sizeElements;
       settings = $.extend(defaults, options);
       callbacks = $.extend(callback, complete);
       $self = $(this);
@@ -57,8 +58,9 @@ License: MIT
         if ($self.children(".mason_clear").length < 1) {
           $self.append(mason_clear);
         }
-        elements.block.height = Math.floor((($self.width() / columnSize()) / settings.ratio).toFixed(0));
-        elements.block.width = Math.floor($self.width() / columnSize()).toFixed(0);
+        elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(0);
+        elements.block.width = parseFloat($self.width() / columnSize()).toFixed(0);
+        elements.startWidth = $self.width();
         sizeElements();
         if (settings.debug) {
           console.log("############## Running In Debug Mode ##############");
@@ -99,17 +101,17 @@ License: MIT
               size = settings.promoted[promoted_size];
               $block.data('size', promoted_size);
               $block.data('promoted', true);
-              h = parseFloat(elements.block.height * size[2]).toFixed(2);
+              h = parseFloat(elements.block.height * size[2]).toFixed(0);
               h = h - (settings.gutter * 2);
-              w = parseFloat(elements.block.width * size[1]).toFixed(2);
+              w = parseFloat(elements.block.width * size[1]).toFixed(0);
               w = w - (settings.gutter * 2);
             } else {
               ran = Math.floor(Math.random() * settings.sizes.length);
               size = settings.sizes[ran];
               $block.data('size', ran);
-              h = parseFloat(elements.block.height * size[1]).toFixed(2);
+              h = parseFloat(elements.block.height * size[1]).toFixed(0);
               h = h - (settings.gutter * 2);
-              w = parseFloat(elements.block.width * size[0]).toFixed(2);
+              w = parseFloat(elements.block.width * size[0]).toFixed(0);
               w = w - (settings.gutter * 2);
             }
             $block.height(h + 'px');
@@ -212,17 +214,21 @@ License: MIT
           }
           r++;
         }
-        if (typeof callbacks.complete !== "undefined") {
-          callbacks.complete();
-        }
-        if (settings.debug) {
-          end = Date.now();
-          return console.log("Finished in: " + (end - start) + "ms");
+        if ($self.width() < elements.startWidth) {
+          return $(window, $self).trigger('resize');
+        } else {
+          if (typeof callbacks.complete !== "undefined") {
+            callbacks.complete();
+          }
+          if (settings.debug) {
+            end = Date.now();
+            return console.log("Finished in: " + (end - start) + "ms");
+          }
         }
       };
       columnSize = function() {
         var cols, colsCount, i, w;
-        w = Math.floor($self.width());
+        w = parseFloat($self.width());
         cols = 0;
         colsCount = settings.columns.length - 1;
         if (w >= settings.columns[colsCount[1]]) {
@@ -236,7 +242,7 @@ License: MIT
             i++;
           }
         }
-        return cols;
+        return Math.floor(cols);
       };
       debug = function() {
         var $debug, block, block_h, c, col, el_h, i;
@@ -280,22 +286,6 @@ License: MIT
         }
         timers[uid] = setTimeout(callback, ms);
         return false;
-      };
-      getScrollbarWidth = function() {
-        var inner, outer, widthNoScroll, widthWithScroll;
-        outer = document.createElement("div");
-        outer.style.visibility = "hidden";
-        outer.style.width = "100px";
-        outer.style.msOverflowStyle = "scrollbar";
-        document.body.appendChild(outer);
-        widthNoScroll = outer.offsetWidth;
-        outer.style.overflow = "scroll";
-        inner = document.createElement("div");
-        inner.style.width = "100%";
-        outer.appendChild(inner);
-        widthWithScroll = inner.offsetWidth;
-        outer.parentNode.removeChild(outer);
-        return widthNoScroll - widthWithScroll;
       };
       if (settings.layout === "fluid") {
         resize = null;
