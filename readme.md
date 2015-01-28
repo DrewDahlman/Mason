@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-<img src='http://drewdahlman.com/experiments/mason/logo.png'>
-##Mason.js
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/DrewDahlman/Mason?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-=======
 ## MasonJS
->>>>>>> 2.0
 Mason.js is a jQuery plugin that allows you to create a perfect grid of elements.<br/><br/>
 This is not Masonry, or Isotope or Gridalicious. Mason fills in those ugly gaps, and creates a perfectly filled space.
 
@@ -96,16 +89,12 @@ $("#container").mason({
 		<ul>
 			<li>itemSelector: This describes the elements to be used to fill in blank spaces. This will default to the original itemSelector if there is nothing</li>
 			<li>filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid</li>
-<<<<<<< HEAD
-			<li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells  Mason to retain the events and data that have already been bound to the filler elements</li>
-=======
 			<li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells Mason to retain the events and data that have already been bound to the filler elements</li>
 		</ul>
 	</li>
 	<li><strong>promoted</strong>
 		<ul>
 		<li>Accepts an array of ['CLASS_NAME', WIDTH, HEIGHT] these items will be forced to those dimentsions.</li>
->>>>>>> 2.0
 		</ul>
 	</li>
 	<li><strong>Layout</strong>
