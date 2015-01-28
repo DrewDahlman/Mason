@@ -9,7 +9,7 @@ License: MIT
  */
 (function($) {
   return $.fn.mason = function(options, complete) {
-    var callback, debug_elements, defaults, elements, mason_clear, start;
+    var $self, callback, debug_elements, defaults, elements, mason_clear, start;
     defaults = {
       itemSelector: '',
       ratio: 0,
@@ -28,6 +28,7 @@ License: MIT
       debug: false
     };
     start = Date.now();
+    $self = null;
     debug_elements = {
       container: $("<div id='debug'></div>"),
       block: "<div class='mason-debug' style='background-color: rgba(244, 67, 54, .5); float: left;'></div>"
@@ -47,7 +48,7 @@ License: MIT
       startWidth: 0
     };
     this.each(function() {
-      var $self, callbacks, columnSize, debounce, debug, layBricks, mason, resize, settings, setup, sizeElements;
+      var callbacks, columnSize, debug, layBricks, mason, resize, settings, setup, sizeElements;
       settings = $.extend(defaults, options);
       callbacks = $.extend(callback, complete);
       $self = $(this);
@@ -58,8 +59,8 @@ License: MIT
         if ($self.children(".mason_clear").length < 1) {
           $self.append(mason_clear);
         }
-        elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(0);
-        elements.block.width = parseFloat($self.width() / columnSize()).toFixed(0);
+        elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio);
+        elements.block.width = parseFloat($self.width() / columnSize());
         elements.startWidth = $self.width();
         sizeElements();
         if (settings.debug) {
@@ -275,18 +276,6 @@ License: MIT
         debug_elements.container.append(mason_clear);
         return $debug.prepend(debug_elements.container);
       };
-      debounce = function(uid, ms, callback) {
-        var timers;
-        timers = {};
-        if (!uid) {
-          uid = Math.random();
-        }
-        if (timers[uid]) {
-          clearTimeout(timers[uid]);
-        }
-        timers[uid] = setTimeout(callback, ms);
-        return false;
-      };
       if (settings.layout === "fluid") {
         resize = null;
         $(window, $self).on('resize', (function(_this) {
@@ -303,6 +292,11 @@ License: MIT
       }
       return setup();
     });
+    return {
+      destroy: function() {
+        return $(window, $self).off('resize');
+      }
+    };
   };
 })(jQuery);
 

@@ -114,6 +114,8 @@ $("#container").mason({
 	</li>
 </ul>
 
+## DESTROY
+At times you may want to destroy the mason object and no longer track window changes, to do this assign the mason grid to a variable such as `var mason` and when you're ready to destroy just call `mason.destroy()` this will remove all listeners on the mason object and you can remove the grid or elements without any ill effects.
 
 ## Install
 1. `npm install`

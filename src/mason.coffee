@@ -40,7 +40,8 @@ License: MIT
 		}
 
 		start = Date.now()
-
+		$self = null
+		
 		#------------------------------------------------------------------------------
 		#
 		#  Debug Elements
@@ -116,12 +117,12 @@ License: MIT
 				#
 				#	Set the element block height
 				#
-				elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(0)
+				elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio)
 
 				#
 				#	Set the element block width
 				#
-				elements.block.width = parseFloat(($self.width() / columnSize())).toFixed(0)
+				elements.block.width = parseFloat(($self.width() / columnSize()))
 
 				#
 				#	Set Start Width
@@ -501,22 +502,6 @@ License: MIT
 
 			#------------------------------------------------------------------------------
 			#
-			#	Debounce
-			#
-			#------------------------------------------------------------------------------
-			debounce = (uid, ms, callback) ->
-				timers = {}
-				if !uid
-					uid = Math.random()
-
-				if timers[uid]
-					clearTimeout(timers[uid])
-
-				timers[uid] = setTimeout(callback, ms)
-				false
-
-			#------------------------------------------------------------------------------
-			#
 			#	Resize
 			#
 			#------------------------------------------------------------------------------
@@ -542,5 +527,8 @@ License: MIT
 			#------------------------------------------------------------------------------
 			setup()
 
-		return
+		return {
+			destroy: () ->
+				$(window, $self).off 'resize'
+		}
 ) jQuery
