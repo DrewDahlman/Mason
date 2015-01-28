@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mason by DrewDahlman</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mason</h1>
+        <p>Mason.js for creating a perfect grid with jQuery.</p>
+
+        <p class="view"><a href="https://github.com/DrewDahlman/Mason">View the Project on GitHub <small>DrewDahlman/Mason</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/DrewDahlman/Mason/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/DrewDahlman/Mason/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/DrewDahlman/Mason">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="masonjs" class="anchor" href="#masonjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>MasonJS</h2>
+
+<p>Mason.js is a jQuery plugin that allows you to create a perfect grid of elements.<br><br>
+This is not Masonry, or Isotope or Gridalicious. Mason fills in those ugly gaps, and creates a perfectly filled space.</p>
+
+<h2>
+<a id="use" class="anchor" href="#use" aria-hidden="true"><span class="octicon octicon-link"></span></a>USE</h2>
+
+<p><br><br>
+<strong>Basic CSS </strong></p>
+
+<pre>
+#container {
+    width: 100%
+    position: relative;
+}
+.box {
+    float: left;
+    background-color: #00ffff;
+    position: relative;
+}
+</pre>
+
+<p><br><br>
+<strong>Call Mason.js ( BASIC )</strong></p>
+
+<pre>
+$("#container").mason({
+    itemSelector: ".box",
+    ratio: 1.5,
+    sizes: [
+        [1,1],
+        [1,2],
+        [2,2]
+    ]
+});
+</pre>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>OPTIONS</h2>
+
+<p>Mason.js has a number of options:</p>
+
+<pre>
+$("#container").mason({
+    itemSelector: ".box",
+    ratio: 1.5,
+    sizes: [
+        [1,1],
+        [1,2],
+        [2,2]
+    ],
+    columns: [
+        [0,480,1],
+        [480,780,2],
+        [780,1080,3],
+        [1080,1320,4],
+        [1320,1680,5]
+    ],
+    promoted: [
+        ['class_name', 2, 1],
+        ['class_name', 2, 3],
+        ['class_name', 3, 3],
+    ],
+    filler: {
+        itemSelector: '.fillerBox',
+        filler_class: 'custom_filler',
+        keepDataAndEvents: false
+    },
+    layout: 'fluid',
+    gutter: 10
+},function(){
+    console.log("COMPLETE!")
+});
+</pre>
+
+<ul>
+    <li>
+<strong>itemSelector</strong>
+        <ul>
+            <li>the element that makes up your grid</li>
+        </ul>
+    </li>
+    <li>
+<strong>ratio</strong>
+        <ul>
+            <li>The ratio is a number that is used to create the blocks based on column count and width. This is based on the number of columns requested and the browser width.</li>
+        </ul>
+    </li>
+    <li>
+<strong>sizes</strong>
+        <ul>
+            <li>Sizes are an array of sizes you wish to use in your grid. These are composed of block numbers. ( ex: [1,1] means 1 block high, 1 block wide )</li>
+        </ul>
+    </li>
+    <li>
+<strong>columns</strong>
+        <ul>
+            <li>columns are an array of break points for your columns. Think of this like media queries. start small and grow. They should be formatted as [min,max,cols]</li>
+        </ul>
+    </li>
+    <li>
+<strong>filler</strong>
+        <ul>
+            <li>itemSelector: This describes the elements to be used to fill in blank spaces. This will default to the original itemSelector if there is nothing</li>
+            <li>filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid</li>
+            <li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells Mason to retain the events and data that have already been bound to the filler elements</li>
+        </ul>
+    </li>
+    <li>
+<strong>promoted</strong>
+        <ul>
+        <li>Accepts an array of ['CLASS_NAME', WIDTH, HEIGHT] these items will be forced to those dimentsions.</li>
+        </ul>
+    </li>
+    <li>
+<strong>Layout</strong>
+        <ul>
+            <li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be responsive.</li>
+        </ul>
+    </li>
+    <li>
+<strong>Callback</strong>
+        <ul>
+            <li>You can add a callback function to Mason to notify you when the grid has completed building.</li>
+        </ul>
+    </li>
+    <li>
+<strong>Gutter</strong>
+        <ul>
+            <li>Allows you to add spacing between the elements, think of this as a margin.</li>
+        </ul>
+    </li>
+</ul>
+
+<h2>
+<a id="destroy" class="anchor" href="#destroy" aria-hidden="true"><span class="octicon octicon-link"></span></a>DESTROY</h2>
+
+<p>At times you may want to destroy the mason object and no longer track window changes, to do this assign the mason grid to a variable such as <code>var mason</code> and when you're ready to destroy just call <code>mason.destroy()</code> this will remove all listeners on the mason object and you can remove the grid or elements without any ill effects.</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<ol>
+<li><p><code>npm install</code></p></li>
+<li><p><code>bower install</code></p></li>
+</ol>
+
+<h2>
+<a id="running" class="anchor" href="#running" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running</h2>
+
+<p>cd into project and run <code>gulp</code></p>
+
+<h2>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
+
+<p>cd into project </p>
+
+<ol>
+<li><p>run <code>gulp dist</code></p></li>
+<li><p>run <code>gulp finish_dist</code></p></li>
+</ol>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Look at the public folder for examples.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/DrewDahlman">DrewDahlman</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("A-41580075-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
