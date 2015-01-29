@@ -72,7 +72,7 @@ $("#grid-b").mason({
         [2,1]
     ],
     columns: [
-        [0, 1920, 8]
+        [0, 480, 8]
     ],
     filler: {
         itemSelector: '.filler-fade',
@@ -141,7 +141,7 @@ $("#grid-c").mason({
         ['wide', 3, 2]
     ],
     columns: [
-        [0, 1920, 8]
+        [0, 480, 8]
     ],
     filler: {
         itemSelector: '.filler'
@@ -234,6 +234,10 @@ $("#grid-c").mason({
                         [1,2],
                         [2,1]
                     ],
+                    columns: [
+                        [0, 480, 3],
+                        [480, 1920, 5]
+                    ],
                     gutter: 5,
                     layout: 'fluid'
                 });
@@ -245,17 +249,18 @@ $("#grid-c").mason({
                 //////////////////////////////////////////////
                 $("#grid-b").mason({
                     itemSelector: '.box',
-                    ratio: 1,
+                    ratio: 1.5,
                     sizes: [
                         [1,1],
                         [1,2],
                         [2,1]
                     ],
                     columns: [
-                        [0, 1920, 8]
+                        [0, 480, 4]
                     ],
                     filler: {
                         itemSelector: '.filler-fade',
+                        fillerClass: 'mason-filler'
                     },
                     gutter: 5,
                     layout: 'fluid'
@@ -274,7 +279,7 @@ $("#grid-c").mason({
                 //////////////////////////////////////////////
                 $("#grid-c").mason({
                     itemSelector: '.box',
-                    ratio: 1,
+                    ratio: 1.5,
                     sizes: [
                         [1,1],
                     ],
@@ -284,10 +289,11 @@ $("#grid-c").mason({
                         ['wide', 3, 2]
                     ],
                     columns: [
-                        [0, 1920, 8]
+                        [0, 480, 4]
                     ],
                     filler: {
-                        itemSelector: '.filler'
+                        itemSelector: '.filler',
+                        fillerClass: 'mason-filler'
                     },
                     gutter: 5,
                     layout: 'fluid'
