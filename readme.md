@@ -1,4 +1,4 @@
-[![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
 
 ## MasonJS
 Mason.js is a jQuery plugin that allows you to create a perfect grid of elements.<br/><br/>
