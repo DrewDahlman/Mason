@@ -28,25 +28,48 @@
                 <p>Mason works best with images if they are set as a background-image on your grid elements.</p>
             </header>
             <section class='example' id='image-grid'></section>
+            <div class='fillers'></div>
         </div>
 
         <script src="javascripts/jQuery.js"></script>
         <script src="javascripts/mason.js"></script>
 
         <script>
+            var grid_images;
+
             $(function(){
                 $.ajax({
-                    url: 'http://api.gifme.io/v1/search?query=nature&limit=100&page=0&key=rX7kbMzkGu7WJwvG',
+                    url: 'http://api.gifme.io/v1/search?query=art&limit=10&page=0&key=rX7kbMzkGu7WJwvG',
                     dataType: "JSON",
                     success: function(data){
-                        make_grid(data);
+                        grid_images = data;
+                        get_fillers()
                     }
                 })
             });
 
+            function get_fillers(){
+                $.ajax({
+                    url: 'http://api.gifme.io/v1/search?query=art&limit=10&page=1&key=rX7kbMzkGu7WJwvG',
+                    dataType: "JSON",
+                    success: function(data){
+                        make_fillers(data)
+                    }
+                })
+            }
+
+            function make_fillers(data){
+                for(var i = 0; i < data.data.length; i++){
+                    var box = "<div class='filler' style='background-image: url("+data.data[i]['thumb']+")';></div>";
+                    $(".fillers").append(box);
+                }
+
+                make_grid();
+            }
+
             function make_grid(images){
-                for(var i = 0; i < images.data.length; i++){
-                    var box = "<div class='box' style='background-image: url("+images.data[i]['thumb']+")';></div>";
+                for(var i = 0; i < grid_images.data.length; i++){
+                    var box = "<div class='box' style='background-image: url("+grid_images.data[i]['thumb']+")';></div>";
                     $("#image-grid").append(box);
                 }
 
@@ -66,6 +89,10 @@
                         [0, 480, 3],
                         [480, 1920, 5]
                     ],
+                    filler: {
+                        itemSelector: '.filler',
+                        filler_class: 'mason-filler'
+                    },
                     gutter: 5,
                     layout: 'fluid'
                 });
