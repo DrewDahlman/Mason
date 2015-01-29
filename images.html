@@ -24,7 +24,6 @@
 
         <div id='wrapper'>
             <section class='example' id='image-grid'>
-                <div class='box' style='background-image: url()'></div>
             </section>
         </div>
 
@@ -33,16 +32,41 @@
 
         <script>
             $(function(){
-                
                 $.ajax({
-                    url: 'http://api.gifme.io/v1/search?query=whoa%20awesome&limit=100&page=0&key=rX7kbMzkGu7WJwvG',
+                    url: 'http://api.gifme.io/v1/search?query=nature&limit=100&page=0&key=rX7kbMzkGu7WJwvG',
                     dataType: "JSON",
                     success: function(data){
-                        console.log(data);
+                        make_grid(data);
                     }
                 })
-
             });
+
+            function make_grid(images){
+                for(var i = 0; i < images.data.length; i++){
+                    var box = "<div class='box' style='background-image: url("+images.data[i]['thumb']+")';></div>";
+                    $("#image-grid").append(box);
+                }
+
+                mason();
+            }
+
+            function mason(){
+                $("#image-grid").mason({
+                    itemSelector: '.box',
+                    ratio: 1.2,
+                    sizes: [
+                        [1,1],
+                        [1,2],
+                        [2,1]
+                    ],
+                    columns: [
+                        [0, 480, 3],
+                        [480, 1920, 5]
+                    ],
+                    gutter: 5,
+                    layout: 'fluid'
+                });
+            }
         </script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
