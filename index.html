@@ -30,6 +30,19 @@
             <section class='copy'>
                 <h1>Example</h1>
                 <p>Below is a basic example of Mason at work.</p>
+                <pre>
+$("#grid-a").mason({
+    itemSelector: '.box',
+    ratio: 1.2,
+    sizes: [
+        [1,1],
+        [1,2],
+        [2,1]
+    ],
+    gutter: 5,
+    layout: 'fluid'
+});
+                </pre>
             </section>
 
             <section class='example' id='grid-a'>
@@ -47,6 +60,27 @@
                 <p>Mason works by flowing a grid of floated elements as a normal CSS layout, then measuring the dimensions of the blocks and total grid area. It then detects where gaps are and fills them.
                 <br/><br/>
                 It uses <b>fillers</b> which to fill in gaps. Fillers are elements that you can define or it will reuse elements within the grid.
+                <br/><br/>
+                <a href='#' id='toggle'>Toggle on / off</a>
+                <pre>
+$("#grid-b").mason({
+    itemSelector: '.box',
+    ratio: 1,
+    sizes: [
+        [1,1],
+        [1,2],
+        [2,1]
+    ],
+    columns: [
+        [0, 1920, 8]
+    ],
+    filler: {
+        itemSelector: '.filler-fade',
+    },
+    gutter: 5,
+    layout: 'fluid'
+});
+                </pre>
                 </p>
 
                 <section class='example' id='grid-b'>
@@ -83,12 +117,87 @@
                 </section>
 
                 <div class='fillers'>
-                    <div class='filler'><h1>F1</h1></div>
-                    <div class='filler'><h1>F2</h1></div>
-                    <div class='filler'><h1>F3</h1></div>
-                    <div class='filler'><h1>F4</h1></div>
+                    <div class='filler-fade'></div>
+                    <div class='filler-fade'></div>
+                    <div class='filler-fade'></div>
+                    <div class='filler-fade'></div>
                 </div>
 
+            </section>
+
+            <section class='copy'>
+                <h1>Promoted Options</h1>
+                <p>You can tell mason to <b>promote</b> specific elements if you want by assigning a class and telling mason in the config. Notice in this grid nothing changes on refresh.
+                <pre>
+$("#grid-c").mason({
+    itemSelector: '.box',
+    ratio: 1,
+    sizes: [
+        [1,1],
+    ],
+    promoted: [
+        ['large', 3, 3],
+        ['tall', 1, 3],
+        ['wide', 3, 2]
+    ],
+    columns: [
+        [0, 1920, 8]
+    ],
+    filler: {
+        itemSelector: '.filler'
+    },
+    gutter: 5,
+    layout: 'fluid'
+});
+                </pre>
+                </p>
+
+                <section class='example' id='grid-c'>
+                    <div class='box large'>
+                        <h1>1 Large</h1>
+                    </div>
+                    <div class='box tall'>
+                        <h1>2 tall</h1>
+                    </div>
+                    <div class='box'>
+                        <h1>3</h1>
+                    </div>
+                    <div class='box wide'>
+                        <h1>4 wide</h1>
+                    </div>
+                    <div class='box tall'>
+                        <h1>5 tall</h1>
+                    </div>
+                    <div class='box tall'>
+                        <h1>6 tall</h1>
+                    </div>
+                    <div class='box'>
+                        <h1>7</h1>
+                    </div>
+                    <div class='box large'>
+                        <h1>8 large</h1>
+                    </div>
+                    <div class='box'>
+                        <h1>9</h1>
+                    </div>
+                    <div class='box'>
+                        <h1>10</h1>
+                    </div>
+                </section>
+
+                <div class='fillers'>
+                    <div class='filler'></div>
+                    <div class='filler'></div>
+                    <div class='filler'></div>
+                    <div class='filler'></div>
+                </div>
+
+            </section>
+
+            <section class='copy'>
+                <h1>This is rad! I want to make some grids!</h1>
+                <p>Check out the <a href='https://github.com/DrewDahlman/Mason' target='_blank'>GitHub</a> project for more information & use!
+                </p>
             </section>
 
             
@@ -143,13 +252,43 @@
                         [2,1]
                     ],
                     columns: [
-                        [0, 480, 6]
+                        [0, 1920, 8]
                     ],
                     filler: {
-                        itemSelector: '.filler',
-                        fillerClass: 'mason-filler'
+                        itemSelector: '.filler-fade',
                     },
-                    randomFillers: false,
+                    gutter: 5,
+                    layout: 'fluid'
+                }, function(){
+                        $("#toggle").on('click', function(event){
+                            event.preventDefault();
+                            $(".filler-fade").toggleClass('show')
+                        })
+                    }
+                );
+
+                //////////////////////////////////////////////
+                //
+                //    EXAMPLE 3
+                //
+                //////////////////////////////////////////////
+                $("#grid-c").mason({
+                    itemSelector: '.box',
+                    ratio: 1,
+                    sizes: [
+                        [1,1],
+                    ],
+                    promoted: [
+                        ['large', 3, 3],
+                        ['tall', 1, 3],
+                        ['wide', 3, 2]
+                    ],
+                    columns: [
+                        [0, 1920, 8]
+                    ],
+                    filler: {
+                        itemSelector: '.filler'
+                    },
                     gutter: 5,
                     layout: 'fluid'
                 });

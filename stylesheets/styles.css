@@ -112,11 +112,13 @@ section.copy {
 }
 
 .box,
-.filler {
+.filler,
+.filler-fade {
   position: relative;
   float: left;
   background-color: #e3f2fd;
   color: #fff;
+  text-align: center;
 }
 
 .box h1,
@@ -126,11 +128,29 @@ section.copy {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .filler,
-.mason-filler {
+.mason-filler,
+.filler-fade {
   background-color: #ef5350;
+}
+
+.filler-fade {
+  opacity: 0;
+  -webkit-transition: opacity .35s;
+  -moz-transition: opacity .35s;
+  -o-transition: opacity .35s;
+  -ms-transition: opacity .35s;
+  transition: opacity .35s;
+}
+
+.filler-fade.show {
+  opacity: 1;
 }
 
 @media print, screen and (max-width: 960px) {
