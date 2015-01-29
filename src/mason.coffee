@@ -137,12 +137,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				#
 				#	Set the element block height
 				#
-				elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio)
+				elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(2)
 
 				#
 				#	Set the element block width
 				#
-				elements.block.width = parseFloat(($self.width() / columnSize()))
+				elements.block.width = parseFloat(($self.width() / columnSize())).toFixed(2)
 
 				#
 				#	Set Start Width
@@ -271,9 +271,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				#
 				col = columnSize()
 				el_h = $self.height()
-				block_h = el_h / elements.block.height
+				block_h = Math.round(el_h / elements.block.height)
 				elements.matrix = []
-				
+
 				#
 				#	Loop over blocks and fill out the matrix with booleans
 				#	Defaults to false first then we will do logic to set true
