@@ -112,11 +112,10 @@ section.copy {
 }
 
 .box,
-.filler,
-.filler-fade {
+#grid-a .filler {
   position: relative;
   float: left;
-  background-color: #e3f2fd;
+  background-color: #039be5;
   color: #fff;
   text-align: center;
 }
@@ -140,7 +139,7 @@ section.copy {
   background-color: #ef5350;
 }
 
-.filler-fade {
+#grid-b .filler{
   opacity: 0;
   -webkit-transition: opacity .35s;
   -moz-transition: opacity .35s;
@@ -149,7 +148,7 @@ section.copy {
   transition: opacity .35s;
 }
 
-.filler-fade.show {
+#grid-b .filler.show {
   opacity: 1;
 }
 

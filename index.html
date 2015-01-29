@@ -29,7 +29,7 @@
 
             <section class='copy'>
                 <h1>Example</h1>
-                <p>Below is a basic example of Mason at work.</p>
+                <p>Below is a basic example of Mason at work.
                 <pre>
 $("#grid-a").mason({
     itemSelector: '.box',
@@ -39,15 +39,23 @@ $("#grid-a").mason({
         [1,2],
         [2,1]
     ],
+    columns: [
+        [0, 480, 3],
+        [480, 1920, 5]
+    ],
+    filler: {
+        itemSelector: '.filler',
+        filler_class: 'mason-filler'
+    },
     gutter: 5,
     layout: 'fluid'
 });
                 </pre>
+
+                </p>
             </section>
 
             <section class='example' id='grid-a'>
-                <div class='box'></div>
-                <div class='box'></div>
                 <div class='box'></div>
                 <div class='box'></div>
                 <div class='box'></div>
@@ -65,17 +73,18 @@ $("#grid-a").mason({
                 <pre>
 $("#grid-b").mason({
     itemSelector: '.box',
-    ratio: 1,
+    ratio: 1.5,
     sizes: [
         [1,1],
         [1,2],
         [2,1]
     ],
     columns: [
-        [0, 480, 8]
+        [0, 480, 6]
     ],
     filler: {
-        itemSelector: '.filler-fade',
+        itemSelector: '.filler',
+        filler_class: 'mason-filler'
     },
     gutter: 5,
     layout: 'fluid'
@@ -116,13 +125,6 @@ $("#grid-b").mason({
                     </div>
                 </section>
 
-                <div class='fillers'>
-                    <div class='filler-fade'></div>
-                    <div class='filler-fade'></div>
-                    <div class='filler-fade'></div>
-                    <div class='filler-fade'></div>
-                </div>
-
             </section>
 
             <section class='copy'>
@@ -141,10 +143,11 @@ $("#grid-c").mason({
         ['wide', 3, 2]
     ],
     columns: [
-        [0, 480, 8]
+        [0, 480, 6]
     ],
     filler: {
-        itemSelector: '.filler'
+        itemSelector: '.filler',
+        filler_class: 'mason-filler'
     },
     gutter: 5,
     layout: 'fluid'
@@ -185,13 +188,123 @@ $("#grid-c").mason({
                     </div>
                 </section>
 
-                <div class='fillers'>
-                    <div class='filler'></div>
-                    <div class='filler'></div>
-                    <div class='filler'></div>
-                    <div class='filler'></div>
-                </div>
+            </section>
 
+            <section class='copy'>
+                <h1>Options</h1>
+                <p>Mason comes with many options for setting up your grid:
+
+                <pre>
+$("#container").mason({
+    itemSelector: ".box",
+    ratio: 1.5,
+    sizes: [
+        [1,1],
+        [1,2],
+        [2,2]
+    ],
+    columns: [
+        [0,480,1],
+        [480,780,2],
+        [780,1080,3],
+        [1080,1320,4],
+        [1320,1680,5]
+    ],
+    promoted: [
+        ['class_name', 2, 1],
+        ['class_name', 2, 3],
+        ['class_name', 3, 3],
+    ],
+    filler: {
+        itemSelector: '.fillerBox',
+        filler_class: 'custom_filler',
+        keepDataAndEvents: false
+    },
+    layout: 'fluid',
+    gutter: 10
+},function(){
+    console.log("COMPLETE!")
+});
+                </pre>
+
+<ul>
+    <li><strong>itemSelector</strong>
+        <ul>
+            <li>the element that makes up your grid</li>
+        </ul>
+    </li>
+    <li><strong>ratio</strong>
+        <ul>
+            <li>The ratio is a number that is used to create the blocks based on column count and width. This is based on the number of columns requested and the browser width. The ratio will always be ( ratio x height ) to give you width.</li>
+        </ul>
+    </li>
+    <li><strong>sizes</strong>
+        <ul>
+            <li>Sizes are an array of sizes you wish to use in your grid. These are composed of block numbers. ( ex: [1,1] means 1 block high, 1 block wide )</li>
+        </ul>
+    </li>
+    <li><strong>columns</strong>
+        <ul>
+            <li>columns are an array of break points for your columns. Think of this like media queries. start small and grow. They should be formatted as [min,max,cols]</li>
+        </ul>
+    </li>
+    <li><strong>filler</strong>
+        <ul>
+            <li>itemSelector: This describes the elements to be used to fill in blank spaces. This will default to the original itemSelector if there is nothing</li>
+            <li>filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid</li>
+            <li>keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells Mason to retain the events and data that have already been bound to the filler elements</li>
+        </ul>
+    </li>
+    <li><strong>promoted</strong>
+        <ul>
+        <li>Accepts an array of ['CLASS_NAME', WIDTH, HEIGHT] these items will be forced to those dimentsions.</li>
+        </ul>
+    </li>
+    <li><strong>Layout</strong>
+        <ul>
+            <li>There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be responsive.</li>
+        </ul>
+    </li>
+    <li><strong>Callback</strong>
+        <ul>
+            <li>You can add a callback function to Mason to notify you when the grid has completed building.</li>
+        </ul>
+    </li>
+    <li><strong>Gutter</strong>
+        <ul>
+            <li>Allows you to add spacing between the elements, think of this as a margin.</li>
+        </ul>
+    </li>
+</ul>
+                </p>
+
+                <h1>Destroy</h1>
+                <p>When you need to destroy a mason object you can call the destroy method which will remove all listeners on the mason object. Note that it will not remove any elements, just simply stop mason from responding
+                <pre>
+var mason = $("#container").masion({
+    itemSelector: '.box',
+    ratio: 1.5,
+    sizes: [
+        [1,1],
+        [1,2],
+        [2,1]
+    ],
+    columns: [
+        [0, 480, 6]
+    ],
+    filler: {
+        itemSelector: '.filler',
+        filler_class: 'mason-filler'
+    },
+    gutter: 5,
+    layout: 'fluid'
+});
+
+function destroy_mason(){
+    mason.destroy();
+}
+                </pre>
+                </p>
             </section>
 
             <section class='copy'>
@@ -200,10 +313,16 @@ $("#grid-c").mason({
                 </p>
             </section>
 
-            
+            <div class='fillers'>
+                <div class='filler'></div>
+                <div class='filler'></div>
+                <div class='filler'></div>
+                <div class='filler'></div>
+            </div>
 
         </div>
-
+        <a href="https://github.com/DrewDahlman/Mason" target='_blank'><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+        
         <script src="javascripts/jQuery.js"></script>
         <script src="javascripts/mason.js"></script>
 
@@ -238,6 +357,10 @@ $("#grid-c").mason({
                         [0, 480, 3],
                         [480, 1920, 5]
                     ],
+                    filler: {
+                        itemSelector: '.filler',
+                        filler_class: 'mason-filler'
+                    },
                     gutter: 5,
                     layout: 'fluid'
                 });
@@ -249,25 +372,25 @@ $("#grid-c").mason({
                 //////////////////////////////////////////////
                 $("#grid-b").mason({
                     itemSelector: '.box',
-                    ratio: 1.5,
+                    ratio: 1.2,
                     sizes: [
                         [1,1],
                         [1,2],
                         [2,1]
                     ],
                     columns: [
-                        [0, 480, 4]
+                        [0, 480, 6]
                     ],
                     filler: {
-                        itemSelector: '.filler-fade',
-                        fillerClass: 'mason-filler'
+                        itemSelector: '.filler',
+                        filler_class: 'mason-filler'
                     },
-                    gutter: 5,
+                    gutter: 1,
                     layout: 'fluid'
                 }, function(){
                         $("#toggle").on('click', function(event){
                             event.preventDefault();
-                            $(".filler-fade").toggleClass('show')
+                            $("#grid-b .filler").toggleClass('show')
                         })
                     }
                 );
@@ -279,7 +402,7 @@ $("#grid-c").mason({
                 //////////////////////////////////////////////
                 $("#grid-c").mason({
                     itemSelector: '.box',
-                    ratio: 1.5,
+                    ratio: 1,
                     sizes: [
                         [1,1],
                     ],
@@ -289,11 +412,11 @@ $("#grid-c").mason({
                         ['wide', 3, 2]
                     ],
                     columns: [
-                        [0, 480, 4]
+                        [0, 480, 6]
                     ],
                     filler: {
                         itemSelector: '.filler',
-                        fillerClass: 'mason-filler'
+                        filler_class: 'mason-filler'
                     },
                     gutter: 5,
                     layout: 'fluid'
