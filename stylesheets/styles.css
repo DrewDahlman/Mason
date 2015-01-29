@@ -113,6 +113,7 @@ section.copy {
 
 .box,
 .filler {
+  position: relative;
   float: left;
   background-color: #e3f2fd;
   color: #fff;

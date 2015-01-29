@@ -42,7 +42,7 @@
                 <div class='box'></div>
             </section>
 
-<!--             <section class='copy'>
+            <section class='copy'>
                 <h1>How does it work?</h1>
                 <p>Mason works by flowing a grid of floated elements as a normal CSS layout, then measuring the dimensions of the blocks and total grid area. It then detects where gaps are and fills them.
                 <br/><br/>
@@ -50,34 +50,34 @@
                 </p>
 
                 <section class='example' id='grid-b'>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>1</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>2</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>3</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>4</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>5</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>6</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>7</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>8</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>9</h1>
                     </div>
-                    <div class='box-b'>
+                    <div class='box'>
                         <h1>10</h1>
                     </div>
                 </section>
@@ -89,7 +89,7 @@
                     <div class='filler'><h1>F4</h1></div>
                 </div>
 
-            </section> -->
+            </section>
 
             
 
@@ -134,25 +134,25 @@
                 //    EXAMPLE 2
                 //
                 //////////////////////////////////////////////
-                // $("#grid-b").mason({
-                //     itemSelector: '.box',
-                //     ratio: 1,
-                //     sizes: [
-                //         [1,1],
-                //         [1,2],
-                //         [2,1]
-                //     ],
-                //     columns: [
-                //         [0, 480, 6]
-                //     ],
-                //     filler: {
-                //         itemSelector: '.filler',
-                //         fillerClass: 'mason-filler'
-                //     },
-                //     randomFillers: false,
-                //     gutter: 5,
-                //     layout: 'fluid'
-                // });
+                $("#grid-b").mason({
+                    itemSelector: '.box',
+                    ratio: 1,
+                    sizes: [
+                        [1,1],
+                        [1,2],
+                        [2,1]
+                    ],
+                    columns: [
+                        [0, 480, 6]
+                    ],
+                    filler: {
+                        itemSelector: '.filler',
+                        fillerClass: 'mason-filler'
+                    },
+                    randomFillers: false,
+                    gutter: 5,
+                    layout: 'fluid'
+                });
 
 
             });

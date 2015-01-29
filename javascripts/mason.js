@@ -80,8 +80,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         if ($self.children(".mason_clear").length < 1) {
           $self.append(mason_clear);
         }
-        elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio);
-        elements.block.width = parseFloat($self.width() / columnSize());
+        elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(2);
+        elements.block.width = parseFloat($self.width() / columnSize()).toFixed(2);
         elements.startWidth = $self.width();
         sizeElements();
         if (settings.debug) {
@@ -149,10 +149,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         var block_h, c, col, el_h, r;
         col = columnSize();
         el_h = $self.height();
-        block_h = el_h / elements.block.height;
+        block_h = Math.round(el_h / elements.block.height);
         elements.matrix = [];
         r = 0;
-        while (r <= block_h) {
+        while (r < block_h) {
           elements.matrix[r] = [];
           c = 0;
           while (c < col) {
