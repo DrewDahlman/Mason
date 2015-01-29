@@ -198,7 +198,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       layBricks = function() {
         var $filler, c, end, filler_index, filler_total, h, r, w, x, y;
         r = 0;
-        filler_total = $("" + settings.filler.itemSelector, $self).not("." + settings.filler.filler_class).length;
+        filler_total = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).length;
         filler_index = -1;
         while (r < elements.matrix.length) {
           c = 0;
