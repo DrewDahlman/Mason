@@ -6,7 +6,7 @@
   ],
   "description": "MasonJS - for creating perfect grids.",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
