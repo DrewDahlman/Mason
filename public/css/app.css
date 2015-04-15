@@ -37,7 +37,7 @@ body #grid-fixed .mason_filler {
   position: relative;
   float: left;
   background-color: #2979ff;
-  color: white;
+  color: #fff;
 }
 body #grid .mason_filler,
 body #grid_b .mason_filler,

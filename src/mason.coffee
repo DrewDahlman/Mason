@@ -137,12 +137,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				#
 				#	Set the element block height
 				#
-				elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(2)
+				elements.block.height = Math.round(parseFloat(($self.width() / columnSize()) / settings.ratio)).toFixed(2)
 
 				#
 				#	Set the element block width
 				#
-				elements.block.width = parseFloat(($self.width() / columnSize())).toFixed(2)
+				elements.block.width = Math.round(parseFloat(($self.width() / columnSize()))).toFixed(2)
 
 				#
 				#	Set Start Width

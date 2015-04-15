@@ -80,8 +80,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         if ($self.children(".mason_clear").length < 1) {
           $self.append(mason_clear);
         }
-        elements.block.height = parseFloat(($self.width() / columnSize()) / settings.ratio).toFixed(2);
-        elements.block.width = parseFloat($self.width() / columnSize()).toFixed(2);
+        elements.block.height = Math.round(parseFloat(($self.width() / columnSize()) / settings.ratio)).toFixed(2);
+        elements.block.width = Math.round(parseFloat($self.width() / columnSize())).toFixed(2);
         elements.startWidth = $self.width();
         sizeElements();
         if (settings.debug) {
@@ -162,7 +162,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           r++;
         }
         $self.children("" + settings.itemSelector).each(function() {
-          var $block, a, bh, bw, h, l, s, t, w, _results;
+          var $block, a, bh, bw, h, l, results, s, t, w;
           $block = $(this);
           l = Math.round($block.position().left / elements.block.width);
           t = Math.round($block.position().top / elements.block.height);
@@ -177,7 +177,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             a = h * w;
           }
           r = 0;
-          _results = [];
+          results = [];
           while (r < a) {
             bh = 0;
             while (bh < h) {
@@ -189,9 +189,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
               }
               bh++;
             }
-            _results.push(r++);
+            results.push(r++);
           }
-          return _results;
+          return results;
         });
         return layBricks();
       };
