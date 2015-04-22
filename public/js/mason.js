@@ -4,7 +4,7 @@
 
 MasonJS
 Author: Drew Dahlman
-Version: 2.0.0
+Version: 2.0.3
 License: MIT
 
 Copyright (c) 2015 Drew Dahlman
@@ -30,7 +30,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 (function($) {
   return $.fn.mason = function(options, complete) {
-    var $self, callback, debug_elements, defaults, elements, mason_clear, start;
+    var $self, callback, debug_elements, defaults, elements, mason_clear;
     defaults = {
       itemSelector: '',
       ratio: 0,
@@ -48,7 +48,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       gutter: 0,
       debug: false
     };
-    start = Date.now();
     $self = null;
     debug_elements = {
       container: $("<div id='debug'></div>"),
@@ -90,7 +89,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         }
       };
       sizeElements = function() {
-        var $block, end;
+        var $block;
         if (columnSize() === 1) {
           $block = $self.children("" + settings.itemSelector);
           $block.height(elements.block.height - (settings.gutter * 2));
@@ -99,11 +98,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             'margin': settings.gutter
           });
           if (typeof callbacks.complete !== "undefined") {
-            callbacks.complete();
-          }
-          if (settings.debug) {
-            end = Date.now();
-            return console.log("Finished in: " + (end - start) + "ms");
+            return callbacks.complete();
           }
         } else {
           $self.children("" + settings.itemSelector, "." + settings.filler.filler_class).each(function() {
@@ -196,7 +191,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         return layBricks();
       };
       layBricks = function() {
-        var $filler, c, end, filler_index, filler_total, h, r, w, x, y;
+        var $filler, c, filler_index, filler_total, h, r, w, x, y;
         r = 0;
         filler_total = $("" + settings.filler.itemSelector).not("." + settings.filler.filler_class).length;
         filler_index = -1;
@@ -240,11 +235,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           return $(window, $self).trigger('resize');
         } else {
           if (typeof callbacks.complete !== "undefined") {
-            callbacks.complete();
-          }
-          if (settings.debug) {
-            end = Date.now();
-            return console.log("Finished in: " + (end - start) + "ms");
+            return callbacks.complete();
           }
         }
       };

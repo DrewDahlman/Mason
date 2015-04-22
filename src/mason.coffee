@@ -2,7 +2,7 @@
 
 MasonJS
 Author: Drew Dahlman
-Version: 2.0.0
+Version: 2.0.3
 License: MIT
 
 Copyright (c) 2015 Drew Dahlman
@@ -59,7 +59,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			debug: false
 		}
 
-		start = Date.now()
 		$self = null
 		
 		#------------------------------------------------------------------------------
@@ -182,10 +181,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 					#
 					if typeof callbacks.complete != "undefined"
 						callbacks.complete()
-
-					if settings.debug
-						end = Date.now()
-						console.log "Finished in: " + (end - start) + "ms"
 				
 				#
 				#	More than 1 column do some math fool!
@@ -437,10 +432,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 					#
 					if typeof callbacks.complete != "undefined"
 						callbacks.complete()
-
-					if settings.debug
-						end = Date.now()
-						console.log "Finished in: " + (end - start) + "ms"
 
 			#------------------------------------------------------------------------------
 			#
