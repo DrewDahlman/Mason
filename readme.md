@@ -16,7 +16,7 @@ This is not Masonry, or Isotope or Gridalicious. Mason fills in those ugly gaps,
 
 ```
 #container {
-	width: 100%
+	width: 100%;
 	position: relative;
 }
 .box {
