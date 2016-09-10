@@ -40,7 +40,7 @@ $("#container").mason({
 });
 ```
 
-##OPTIONS
+## OPTIONS
 
 Mason.js has a number of options:
 
@@ -90,7 +90,7 @@ $("#container").mason({
 	- filler_class: This is a class given to filler elements within the grid, used for cleaning up if a grid set to fluid
 	- keepDataAndEvents: Mason creates a clone of the filler elements before adding them to the grid, this boolean (true/false) property tells Mason to retain the events and data that have already been bound to the filler elements
 - **promoted**
-- Accepts an array of ['CLASS_NAME', WIDTH, HEIGHT] these items will be forced to those dimentsions.
+	- Accepts an array of ['CLASS_NAME', WIDTH, HEIGHT] these items will be forced to those dimensions.
 - **Layout**
 	- There are two layouts, fluid and fixed. Mason will default to fixed. Fluid means it will be responsive.
 - **Callback**
