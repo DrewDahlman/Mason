@@ -10,7 +10,7 @@ This is not Masonry, or Isotope or Gridalicious. Mason fills in those ugly gaps,
 
 `2.0.2`
 
-##USE
+## USE
 
 **Basic CSS**
 
